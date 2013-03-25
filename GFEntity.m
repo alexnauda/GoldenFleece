@@ -7,7 +7,6 @@
 //
 
 #import "GFEntity.h"
-#import "Log.h"
 #import <objc/runtime.h>
 
 @implementation GFEntity
@@ -15,20 +14,20 @@
 - (id)initWithClass:(Class)clazz {
     self = [super init];
     self.clazz = clazz;
-    debug(@"Adding response mapping for class %@", clazz);
+    NSLog(@"Adding response mapping for class %@", clazz);
     RKObjectMapping* responseMapping = [RKObjectMapping mappingForClass:clazz];
     [self autoAddAttributes:responseMapping];
     self.responseMapping = responseMapping;
     
     if ([clazz respondsToSelector:@selector(AMCEnabled)]) {
-        debug(@"Adding request mapping for class %@", clazz);
+        NSLog(@"Adding request mapping for class %@", clazz);
         RKObjectMapping* requestMapping = [RKObjectMapping requestMapping];
         [self autoAddAttributes:requestMapping];
         self.requestMapping = requestMapping;
     } else {
-        debug(@"Class %@ does not respond to selector AMCEnabled", clazz);
-        debug(@"If you want to serialize this class as JSON in a request body, please add this to your .m:");
-        debug(@"+ (BOOL)AMCEnabled { return YES; }");
+        NSLog(@"Class %@ does not respond to selector AMCEnabled", clazz);
+        NSLog(@"If you want to serialize this class as JSON in a request body, please add this to your .m:");
+        NSLog(@"+ (BOOL)AMCEnabled { return YES; }");
     }
     return self;
 }

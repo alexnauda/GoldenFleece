@@ -10,7 +10,6 @@
 #import "NSObject+AutoMagicCoding.h"
 #import <JSONKit/JSONKit.h>
 #import <NSDate+Helper.h>
-#import "Log.h"
 
 @implementation GFClient
 
@@ -67,12 +66,12 @@
            }
                                            error:&error];
     if(jsonData == NULL) {
-        debug(@"Unable to serialize request body.  Error: %@, info: %@", error, [error userInfo]);
+        NSLog(@"Unable to serialize request body.  Error: %@, info: %@", error, [error userInfo]);
         failure(request, nil, error);
     }
     [request setHTTPBody:jsonData];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    debug(@"saveClientContact post data: %@", [[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]);
+    NSLog(@"saveClientContact post data: %@", [[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]);
     
     // now run it
     RKObjectManager *objectManager = self.objectManager;
