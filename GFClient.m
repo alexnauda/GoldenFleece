@@ -59,17 +59,20 @@
     // RestKit doesn't like nested custom objects so I'm using AutomagicCoding and JSONKit
     NSDictionary *dict = [object dictionaryRepresentation];
     NSError *error = NULL;
-    NSData *jsonData = [dict JSONDataWithOptions:JKSerializeOptionNone
-           serializeUnsupportedClassesUsingBlock:^id(id object) {
-               if([object isKindOfClass:[NSDate class]]) { return([NSDate stringFromDate:(NSDate*)object withFormat:@"yyyy-MM-dd"]); }
-               return(NULL);
-           }
-                                           error:&error];
-    if(jsonData == NULL) {
-        NSLog(@"Unable to serialize request body.  Error: %@, info: %@", error, [error userInfo]);
-        failure(request, nil, error);
+    NSData* jsonData = NULL;
+    if (object) {
+        NSData *jsonData = [dict JSONDataWithOptions:JKSerializeOptionNone
+               serializeUnsupportedClassesUsingBlock:^id(id object) {
+                   if([object isKindOfClass:[NSDate class]]) { return([NSDate stringFromDate:(NSDate*)object withFormat:@"yyyy-MM-dd"]); }
+                   return(NULL);
+               }
+                                               error:&error];
+        if(jsonData == NULL) {
+            NSLog(@"Unable to serialize request body.  Error: %@, info: %@", error, [error userInfo]);
+            failure(request, nil, error);
+        }
+        [request setHTTPBody:jsonData];
     }
-    [request setHTTPBody:jsonData];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     NSLog(@"saveClientContact post data: %@", [[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]);
     
