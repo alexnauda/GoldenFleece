@@ -80,7 +80,7 @@
     RKObjectManager *objectManager = self.objectManager;
     RKObjectRequestOperation *operation = [[RKObjectRequestOperation alloc] initWithRequest:request responseDescriptors:[objectManager responseDescriptors]];
     [operation setCompletionBlockWithSuccess:^(RKObjectRequestOperation *operation, RKMappingResult *result) {
-                                        success([[operation HTTPRequestOperation] request], [[operation HTTPRequestOperation] response], [result firstObject]);
+                                         success([[operation HTTPRequestOperation] request], [[operation HTTPRequestOperation] response], [result count] > 1 ? [result array] : [result firstObject]);
                                      }
                                      failure:^(RKObjectRequestOperation *operation, NSError *error) {
                                          failure([[operation HTTPRequestOperation] request], [[operation HTTPRequestOperation] response], error);
