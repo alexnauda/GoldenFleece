@@ -51,7 +51,7 @@
 - (void) jsonRequestWithObject:(NSObject*)object
                           path:(NSString*)path
                         method:(NSString*)method
-                       success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, RKMappingResult *result))success
+                       success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, id object))success
                        failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure {
     NSMutableURLRequest *request = [self.httpClient requestWithMethod:method path:path parameters:nil];
     
