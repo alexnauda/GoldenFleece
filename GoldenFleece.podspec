@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
   # Dependencies
   s.dependency       'AFNetworking', '~> 1.2.0'
   s.dependency       'JSONKit', '~> 1.5pre'
-  s.dependency       'NSObject-AutomagicCoding', :git => 'git@github.com:alexnauda/NSObject-AutomagicCoding.git'
+  s.dependency       'NSObject-AutomagicCoding', '1.1.1.alexnauda' # https://github.com/alexnauda/Specs-internal.git
   s.dependency       'NSDate+Helper', '~> 0.0.1'
 
   s.source_files = '**/*.{h,m}'
