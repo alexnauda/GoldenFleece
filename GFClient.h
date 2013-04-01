@@ -7,21 +7,25 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <RestKit/RestKit.h>
-#import "GFEntity.h"
+#import <AFNetworking/AFNetworking.h>
 
 @interface GFClient : NSObject
 + (id)createWithHttpClient:(AFHTTPClient*)client;
 + (id) sharedInstance;
 
-- (GFEntity*)addClass:(Class)clazz forKey:(NSString*)key;
-
 - (void) jsonRequestWithObject:(NSObject*)object
                           path:(NSString*)path
                         method:(NSString*)method
+                 expectedClass:(Class)class
                        success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, id object))success
                        failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure;
 
-@property (strong, atomic) RKObjectManager* objectManager;
-@property (strong, atomic) AFHTTPClient* httpClient;
+- (void) jsonRequestWithData:(NSData*)data
+                        path:(NSString*)path
+                      method:(NSString*)method
+               expectedClass:(Class)class
+                     success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, id object))success
+                     failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure;
+
+@property (strong, atomic) AFHTTPClient *httpClient;
 @end

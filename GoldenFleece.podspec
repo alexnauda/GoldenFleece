@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   s.osx.deployment_target = '10.7'
 
   # Dependencies
-  s.dependency       'RestKit', '~> 0.20.0'
+  s.dependency       'AFNetworking', '~> 1.2.0'
   s.dependency       'JSONKit', '~> 1.5pre'
   s.dependency       'NSObject-AutomagicCoding', :git => 'git@github.com:alexnauda/NSObject-AutomagicCoding.git'
   s.dependency       'nsdate-helper', :git => 'git@github.com:alexnauda/nsdate-helper.git'
