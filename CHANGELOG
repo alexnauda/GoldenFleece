@@ -1,0 +1,9 @@
+0.2 - 2013-04-01   
+   * [NEW] Removed RestKit dependency in favor of JSONKit plus 
+     NSObject+AutoMagicCoding for both serialization and deserialization
+   * [NEW] Modified API to include an expected class for response
+     deserialization (instead of the previous method of requiring a JSON
+     wrapped object and using a RestKit keyPath to identify the target class)
+   
+0.1 - 2013-03-25
+   * Initial release
