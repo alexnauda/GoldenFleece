@@ -11,14 +11,26 @@
 #import <JSONKit/JSONKit.h>
 #import <NSDate+Helper.h>
 
-@implementation GFClient
+@implementation GFClient {
+    dispatch_queue_t backgroundQueue;
+}
 
 + (id)createWithHttpClient:(AFHTTPClient*)client {
-    [client setDefaultHeader:@"Accept" value:@"application/json"];
     GFClient *gf = [GFClient sharedInstance];
-    gf.httpClient = client;
-    
-    return gf;
+    return [gf initWithHttpClient:client];
+}
+
+- (id)initWithHttpClient:(AFHTTPClient*)client {
+    [client setDefaultHeader:@"Accept" value:@"application/json"];
+    self.httpClient = client;
+    return self;
+}
+
+- (id)init {
+    if (self = [super init]){
+        backgroundQueue = dispatch_queue_create("com.proj.myClass", 0);
+    }
+    return self;
 }
 
 + (id)sharedInstance {
@@ -39,7 +51,17 @@
                         method:(NSString*)method
                  expectedClass:(Class)class
                        success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, id object))success
-                       failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure {    
+                       failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure {
+    [self jsonRequestWithObject:object path:path method:method expectedClass:class success:success failure:failure background:NO];
+}
+
+- (void) jsonRequestWithObject:(NSObject*)object
+                          path:(NSString*)path
+                        method:(NSString*)method
+                 expectedClass:(Class)class
+                       success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, id object))success
+                       failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure
+                    background:(BOOL)background {
     // convert the object into a JSON request body
     // RestKit doesn't like nested custom objects so I'm using AutomagicCoding and JSONKit
     NSDictionary *dict = [object dictionaryRepresentation];
@@ -59,7 +81,7 @@
             NSLog(@"JSON data: %@", [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]);
         }
     }
-    [self jsonRequestWithData:jsonData path:path method:method expectedClass:class success:success failure:failure];
+    [self jsonRequestWithData:jsonData path:path method:method expectedClass:class success:success failure:failure background:background];
 }
 
 /**
@@ -72,6 +94,16 @@
                expectedClass:(Class)class
                      success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, id object))success
                      failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure {
+    [self jsonRequestWithData:data path:path method:method expectedClass:class success:success failure:failure background:NO];
+}
+
+- (void) jsonRequestWithData:(NSData*)data
+                        path:(NSString*)path
+                      method:(NSString*)method
+               expectedClass:(Class)class
+                     success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, id object))success
+                     failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure
+                  background:(BOOL)background {
     NSMutableURLRequest *request = [self.httpClient requestWithMethod:method path:path parameters:nil];
     [request setHTTPBody:data];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -87,6 +119,9 @@
                                                         failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
                                                             failure(request, response, error);
                                                         }];
+    if (background) {
+        [operation setSuccessCallbackQueue:backgroundQueue];
+    }
     [operation start];
 }
 

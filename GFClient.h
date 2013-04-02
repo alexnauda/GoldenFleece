@@ -20,12 +20,28 @@
                        success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, id object))success
                        failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure;
 
+- (void) jsonRequestWithObject:(NSObject*)object
+                          path:(NSString*)path
+                        method:(NSString*)method
+                 expectedClass:(Class)class
+                       success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, id object))success
+                       failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure
+                    background:(BOOL)background;
+
 - (void) jsonRequestWithData:(NSData*)data
                         path:(NSString*)path
                       method:(NSString*)method
                expectedClass:(Class)class
                      success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, id object))success
                      failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure;
+
+- (void) jsonRequestWithData:(NSData*)data
+                        path:(NSString*)path
+                      method:(NSString*)method
+               expectedClass:(Class)class
+                     success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, id object))success
+                     failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure
+                  background:(BOOL)background;
 
 @property (strong, atomic) AFHTTPClient *httpClient;
 @end
