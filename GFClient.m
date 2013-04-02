@@ -75,7 +75,7 @@
     NSMutableURLRequest *request = [self.httpClient requestWithMethod:method path:path parameters:nil];
     [request setHTTPBody:data];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    NSLog(@"saveClientContact post data: %@", [[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]);
+    // NSLog(@"post data: %@", [[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]);
     
     // now run it
     AFJSONRequestOperation *operation =
