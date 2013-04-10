@@ -125,4 +125,36 @@
     [operation start];
 }
 
+- (void) jsonRequestWithParameters:(NSDictionary*)parameters
+                              path:(NSString*)path
+                            method:(NSString*)method
+                     expectedClass:(Class)class
+                           success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, id object))success
+                           failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure {
+    [self jsonRequestWithParameters:parameters path:path method:method expectedClass:class success:success failure:failure background:NO];
+}
+
+- (void) jsonRequestWithParameters:(NSDictionary*)parameters
+                              path:(NSString*)path
+                            method:(NSString*)method
+                     expectedClass:(Class)class
+                           success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, id object))success
+                           failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure
+                        background:(BOOL)background {
+    NSMutableURLRequest *request = [self.httpClient requestWithMethod:method path:path parameters:parameters];
+    AFJSONRequestOperation *operation =
+    [AFJSONRequestOperation JSONRequestOperationWithRequest:request
+                                                    success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+                                                        id object = [[class alloc] initWithDictionaryRepresentation:(NSDictionary*)JSON];
+                                                        success(request, response, object);
+                                                    }
+                                                    failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+                                                        failure(request, response, error);
+                                                    }];
+    if (background) {
+        [operation setSuccessCallbackQueue:backgroundQueue];
+    }
+    [operation start];
+}
+
 @end
