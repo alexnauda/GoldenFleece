@@ -119,6 +119,9 @@
                                                         failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
                                                             failure(request, response, error);
                                                         }];
+    if (self.additionalAcceptableContentTypes) {
+        [AFJSONRequestOperation addAcceptableContentTypes:self.additionalAcceptableContentTypes];
+    }
     if (background) {
         [operation setSuccessCallbackQueue:backgroundQueue];
     }
@@ -151,6 +154,9 @@
                                                     failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
                                                         failure(request, response, error);
                                                     }];
+    if (self.additionalAcceptableContentTypes) {
+        [AFJSONRequestOperation addAcceptableContentTypes:self.additionalAcceptableContentTypes];
+    }
     if (background) {
         [operation setSuccessCallbackQueue:backgroundQueue];
     }

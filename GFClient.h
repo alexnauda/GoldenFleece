@@ -59,4 +59,5 @@
                            failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure;
 
 @property (strong, atomic) AFHTTPClient *httpClient;
+@property (strong, atomic) NSSet *additionalAcceptableContentTypes;
 @end
