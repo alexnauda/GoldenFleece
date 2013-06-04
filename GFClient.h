@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <AFNetworking/AFNetworking.h>
 
+typedef NSString* (^DateToStringBlock)(NSDate*);
+
 @interface GFClient : NSObject
 + (id)createWithHttpClient:(AFHTTPClient*)client;
 + (id) sharedInstance;
@@ -60,4 +62,5 @@
 
 @property (strong, atomic) AFHTTPClient *httpClient;
 @property (strong, atomic) NSSet *additionalAcceptableContentTypes;
+@property (strong, atomic) DateToStringBlock dateToStringBlock;
 @end

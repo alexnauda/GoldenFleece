@@ -10,6 +10,9 @@
 #import "NSObject+AutoMagicCoding.h"
 #import <JSONKit/JSONKit.h>
 #import <NSDate+Helper.h>
+#import <ISO8601DateFormatter.h>
+
+static ISO8601DateFormatter *formatter;
 
 @implementation GFClient {
     dispatch_queue_t backgroundQueue;
@@ -26,10 +29,20 @@
     return self;
 }
 
++ (void)initialize {
+    formatter = [[ISO8601DateFormatter alloc] init];
+}
+
 - (id)init {
     if (self = [super init]){
         backgroundQueue = dispatch_queue_create("com.proj.myClass", 0);
     }
+    self.dateToStringBlock = ^NSString*(NSDate* date) {
+        if([date isKindOfClass:[NSDate class]]) {
+            return([formatter stringFromDate:date]);
+        }
+        return nil;
+    };
     return self;
 }
 
@@ -69,10 +82,7 @@
     NSData* jsonData = NULL;
     if (object) {
         jsonData = [dict JSONDataWithOptions:JKSerializeOptionNone
-               serializeUnsupportedClassesUsingBlock:^id(id object) {
-                   if([object isKindOfClass:[NSDate class]]) { return([NSDate stringFromDate:(NSDate*)object withFormat:@"yyyy-MM-dd"]); }
-                   return(NULL);
-               }
+               serializeUnsupportedClassesUsingBlock:self.dateToStringBlock
                                                error:&error];
         if(jsonData == NULL) {
             NSLog(@"Unable to serialize request body.  Error: %@, info: %@", error, [error userInfo]);
