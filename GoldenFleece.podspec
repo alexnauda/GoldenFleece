@@ -4,7 +4,7 @@ Pod::Spec.new do |s|
   s.summary      =  'On a quest for a better JSON API'
   s.homepage     =  'https://github.com/alexnauda/GoldenFleece'
   s.author       =  { 'Alex Nauda' => 'alex@alexnauda.com' }
-  s.source       =  { :git => 'https://github.com/alexnauda/GoldenFleece', :tag => 'v0.3' }
+  s.source       =  { :git => 'git@github.com:alexnauda/GoldenFleece.git', :tag => 'v0.3' }
   s.license      =  'Apache License, Version 2.0'
   
   # Platform setup
