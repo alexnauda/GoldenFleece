@@ -1,10 +1,10 @@
 Pod::Spec.new do |s|
   s.name         =  'GoldenFleece'
-  s.version      =  '0.2'
+  s.version      =  '0.3'
   s.summary      =  'On a quest for a better JSON API'
   s.homepage     =  'https://github.com/alexnauda/GoldenFleece'
   s.author       =  { 'Alex Nauda' => 'alex@alexnauda.com' }
-  s.source       =  { :git => 'https://github.com/alexnauda/GoldenFleece', :tag => 'v0.2' }
+  s.source       =  { :git => 'https://github.com/alexnauda/GoldenFleece', :tag => 'v0.3' }
   s.license      =  'Apache License, Version 2.0'
   
   # Platform setup
@@ -17,6 +17,7 @@ Pod::Spec.new do |s|
   s.dependency       'JSONKit', '~> 1.5pre'
   s.dependency       'NSObject-AutomagicCoding', '1.1.1.alexnauda' # https://github.com/alexnauda/Specs-internal.git
   s.dependency       'NSDate+Helper', '~> 0.0.1'
+  s.dependency       'ISO8601DateFormatter', '~> 0.6'
 
   s.source_files = '**/*.{h,m}'
 end
