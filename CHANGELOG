@@ -1,4 +1,9 @@
-0.2 - 2013-04-01   
+0.3 - 2013-06-04
+   * [NEW] Support traditional URL-encoded parameters in the request body with new methods jsonRequestWithParameters:
+   * [NEW] Use ISO8601 date formats via new dependency ISO8601DateFormatter
+   * [FIX] Tolerate incorrect content types received from a server by setting additionalAcceptableContentTypes property
+
+0.2 - 2013-04-01
    * [NEW] Removed RestKit dependency in favor of JSONKit plus 
      NSObject+AutoMagicCoding for both serialization and deserialization
    * [NEW] Modified API to include an expected class for response
