@@ -1,3 +1,6 @@
+0.4 - 2013-09-03
+   * [FIX] Upgrade to AFNetworking 1.3.2 to avoid cert pinning bug https://github.com/AFNetworking/AFNetworking/issues/1027
+
 0.3 - 2013-06-04
    * [NEW] Support traditional URL-encoded parameters in the request body with new methods jsonRequestWithParameters:
    * [NEW] Use ISO8601 date formats via new dependency ISO8601DateFormatter
