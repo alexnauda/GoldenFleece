@@ -7,10 +7,9 @@
 //
 
 #import "GFClient.h"
-#import "NSObject+AutoMagicCoding.h"
-#import <JSONKit/JSONKit.h>
 #import <NSDate+Helper.h>
 #import <ISO8601DateFormatter.h>
+#import "NSObject+GFJson.h"
 
 static ISO8601DateFormatter *formatter;
 
@@ -76,14 +75,11 @@ static ISO8601DateFormatter *formatter;
                        failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure
                     background:(BOOL)background {
     // convert the object into a JSON request body
-    // RestKit doesn't like nested custom objects so I'm using AutomagicCoding and JSONKit
     NSDictionary *dict = [object dictionaryRepresentation];
     NSError *error = NULL;
     NSData* jsonData = NULL;
     if (object) {
-        jsonData = [dict JSONDataWithOptions:JKSerializeOptionNone
-               serializeUnsupportedClassesUsingBlock:self.dateToStringBlock
-                                               error:&error];
+        jsonData = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&error];
         if(jsonData == NULL) {
             NSLog(@"Unable to serialize request body.  Error: %@, info: %@", error, [error userInfo]);
             failure(nil, nil, error);
