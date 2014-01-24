@@ -17,5 +17,5 @@ Pod::Spec.new do |s|
   s.dependency       'NSDate+Helper', '~> 0.0.1'
   s.dependency       'ISO8601DateFormatter', '~> 0.6'
 
-  s.source_files = '**/*.{h,m}'
+  s.source_files = 'GoldenFleece/*.{h,m}'
 end
