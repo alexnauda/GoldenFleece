@@ -75,7 +75,7 @@ static ISO8601DateFormatter *formatter;
                        failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure
                     background:(BOOL)background {
     // convert the object into a JSON request body
-    NSDictionary *dict = [object dictionaryRepresentation];
+    NSDictionary *dict = [object jsonObject];
     NSError *error = NULL;
     NSData* jsonData = NULL;
     if (object) {
@@ -119,7 +119,7 @@ static ISO8601DateFormatter *formatter;
     AFJSONRequestOperation *operation =
         [AFJSONRequestOperation JSONRequestOperationWithRequest:request
                                                         success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-                                                            id object = [[class alloc] initWithDictionaryRepresentation:(NSDictionary*)JSON];
+                                                            id object = [[class alloc] initWithJsonObject:(NSDictionary*)JSON];
                                                             success(request, response, object);
                                                         }
                                                         failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
@@ -154,7 +154,7 @@ static ISO8601DateFormatter *formatter;
     AFJSONRequestOperation *operation =
     [AFJSONRequestOperation JSONRequestOperationWithRequest:request
                                                     success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-                                                        id object = [[class alloc] initWithDictionaryRepresentation:(NSDictionary*)JSON];
+                                                        id object = [[class alloc] initWithJsonObject:(NSDictionary*)JSON];
                                                         success(request, response, object);
                                                     }
                                                     failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
