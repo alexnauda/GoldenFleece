@@ -15,9 +15,55 @@
 @implementation NSObject (GFJson)
 
 - (id)initWithJsonObject:(id)jsonObject {
-
-    
-    return NULL;
+    debug(@"examining jsonObject of class %@", [jsonObject class]);
+    if ([self isJsonPrimitive] && [jsonObject isJsonPrimitive]) {
+        /*
+         * JSON primitive (return the primitive)
+         */
+        debug(@"returning object of class %@", [jsonObject class]);
+        return jsonObject;
+    } else if ([jsonObject isKindOfClass:[NSArray class]] && ![self isKindOfClass:[NSArray class]]) {
+        /*
+         * JSON array (return an NSArray)
+         */
+        // the JSON contained an array, but I'm not an array; we'll instantate an array with my class as elements
+        NSArray *jsonArray = (NSArray*)jsonObject;
+        NSMutableArray *results = [[NSMutableArray alloc] initWithCapacity:jsonArray.count];
+        for (id jsonElem in jsonArray) {
+            id elem = [[[self class] alloc] initWithJsonObject:jsonElem];
+            [results addObject:elem];
+        }
+        debug(@"returning object of class %@", [results class]);
+        return results;
+    } else if ([jsonObject isKindOfClass:[NSDictionary class]]) {
+        /*
+         * JSON object
+         */
+        if ([self isKindOfClass:[NSDictionary class]]) {
+            // a dictionary is expected so pass through the jsonObject dictionary unchanged
+            debug(@"returning object of class %@", [jsonObject class]);
+            return jsonObject;
+        } else {
+            NSDictionary *dict = (NSDictionary*)jsonObject;
+            // populate self from this dictionary, which represents self in JSON object notation
+            NSDictionary *props = [self getPropertiesAndClasses];
+            for (NSString *jsonName in [dict allKeys]) {
+                Class propertyClass = [props objectForKey:jsonName];
+                if (propertyClass) {
+                    id propertyValue = [[propertyClass alloc] initWithJsonObject:[dict objectForKey:jsonName]];
+                    [self setValue:propertyValue forKey:jsonName];
+                } else {
+                    debug(@"did not find a property in class %@ that matches JSON name %@", [self class], jsonName);
+                }
+            }
+            debug(@"returning object of class %@", [self class]);
+            return self;
+        }
+    } else {
+        NSLog(@"unsupported JSON object class %@", [jsonObject class]);
+        debug(@"returning nil");
+        return nil;
+    }
 }
 
 /*
