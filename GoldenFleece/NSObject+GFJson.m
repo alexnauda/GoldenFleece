@@ -64,9 +64,9 @@
         NSDictionary *props = [self getPropertiesAndClasses];
         NSMutableDictionary *result = [[NSMutableDictionary alloc] initWithCapacity:[props count]];
         for (NSString *propName in [props allKeys]) {
-            id propValue = [props objectForKey:propName];
+            id propValue = [self valueForKeyPath:propName];
             if (propValue) {
-                [result setObject:propValue forKey:propName];
+                [result setObject:[propValue jsonObject] forKey:propName];
             } else {
                 [result setObject:[NSNull null] forKey:propName];
             }
@@ -94,7 +94,7 @@
             debug(@"ERROR property %@ has type float, which is not supported", propertyName);
         } else if (strcmp(rawPropertyType, @encode(int)) == 0) {
             debug(@"ERROR property %@ has type int, which is not supported", propertyName);
-        } else if (strcmp(rawPropertyType, @encode(id)) == 0) {
+        } else if ([@"@\"NSString\"" isEqualToString:propertyType] || [@"@\"NSNumber\"" isEqualToString:propertyType] || [@"@\"NSNull\"" isEqualToString:propertyType] || strcmp(rawPropertyType, @encode(id)) == 0) {
             if ([typeAttribute hasPrefix:@"T@"] && [typeAttribute length] > 1) {
                 NSString * className = [typeAttribute substringWithRange:NSMakeRange(3, [typeAttribute length]-4)];  // remove @"..."
                 debug(@"property %@ has class %@", propertyName, className);
