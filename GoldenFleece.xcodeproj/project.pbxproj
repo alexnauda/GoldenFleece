@@ -1,0 +1,591 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		12D7C68C64C44189BEE937F5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA9BCC19EF1E4EF3BAE7BCF3 /* libPods.a */; };
+		FA2B0DFD18931BDE00A448E7 /* GFGistCommentWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA2B0DFB18931BDE00A448E7 /* GFGistCommentWindowController.m */; };
+		FA2B0DFE18931BDE00A448E7 /* GFGistCommentWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA2B0DFC18931BDE00A448E7 /* GFGistCommentWindowController.xib */; };
+		FA2B0E0218931DCC00A448E7 /* GitHubComment.m in Sources */ = {isa = PBXBuildFile; fileRef = FA2B0E0118931DCC00A448E7 /* GitHubComment.m */; };
+		FA2B0E0818931E4E00A448E7 /* GFClient.m in Sources */ = {isa = PBXBuildFile; fileRef = FA2B0E0518931E4E00A448E7 /* GFClient.m */; };
+		FA2B0E0918931E4E00A448E7 /* NSObject+GFJson.m in Sources */ = {isa = PBXBuildFile; fileRef = FA2B0E0718931E4E00A448E7 /* NSObject+GFJson.m */; };
+		FA2B0E0C1893245E00A448E7 /* GitHubApi.m in Sources */ = {isa = PBXBuildFile; fileRef = FA2B0E0B1893245E00A448E7 /* GitHubApi.m */; };
+		FA2D71B71892FF18002DD173 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA2D71B61892FF18002DD173 /* Cocoa.framework */; };
+		FA2D71C11892FF18002DD173 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FA2D71BF1892FF18002DD173 /* InfoPlist.strings */; };
+		FA2D71C31892FF18002DD173 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FA2D71C21892FF18002DD173 /* main.m */; };
+		FA2D71C71892FF18002DD173 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = FA2D71C51892FF18002DD173 /* Credits.rtf */; };
+		FA2D71CA1892FF18002DD173 /* GFAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FA2D71C91892FF18002DD173 /* GFAppDelegate.m */; };
+		FA2D71CD1892FF18002DD173 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA2D71CB1892FF18002DD173 /* MainMenu.xib */; };
+		FA2D71CF1892FF18002DD173 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA2D71CE1892FF18002DD173 /* Images.xcassets */; };
+		FA2D71D61892FF18002DD173 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA2D71D51892FF18002DD173 /* XCTest.framework */; };
+		FA2D71D71892FF18002DD173 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA2D71B61892FF18002DD173 /* Cocoa.framework */; };
+		FA2D71DF1892FF18002DD173 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FA2D71DD1892FF18002DD173 /* InfoPlist.strings */; };
+		FA2D71E11892FF18002DD173 /* GoldenFleeceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FA2D71E01892FF18002DD173 /* GoldenFleeceTests.m */; };
+		FA2D71ED1893106D002DD173 /* GFFindUserWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA2D71EB1893106D002DD173 /* GFFindUserWindowController.m */; };
+		FA2D71EE1893106D002DD173 /* GFFindUserWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA2D71EC1893106D002DD173 /* GFFindUserWindowController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FA2D71D81892FF18002DD173 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FA2D71AB1892FF18002DD173 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FA2D71B21892FF18002DD173;
+			remoteInfo = GoldenFleece;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		4ACEF1A5F31340C5BA7DAEA8 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		FA2B0DFA18931BDE00A448E7 /* GFGistCommentWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GFGistCommentWindowController.h; path = GFTestApp/GFGistCommentWindowController.h; sourceTree = SOURCE_ROOT; };
+		FA2B0DFB18931BDE00A448E7 /* GFGistCommentWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GFGistCommentWindowController.m; path = GFTestApp/GFGistCommentWindowController.m; sourceTree = SOURCE_ROOT; };
+		FA2B0DFC18931BDE00A448E7 /* GFGistCommentWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GFGistCommentWindowController.xib; path = GFTestApp/GFGistCommentWindowController.xib; sourceTree = SOURCE_ROOT; };
+		FA2B0E0018931DCC00A448E7 /* GitHubComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GitHubComment.h; path = "GFTestApp/GitHub Model/GitHubComment.h"; sourceTree = SOURCE_ROOT; };
+		FA2B0E0118931DCC00A448E7 /* GitHubComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GitHubComment.m; path = "GFTestApp/GitHub Model/GitHubComment.m"; sourceTree = SOURCE_ROOT; };
+		FA2B0E0418931E4E00A448E7 /* GFClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFClient.h; sourceTree = "<group>"; };
+		FA2B0E0518931E4E00A448E7 /* GFClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFClient.m; sourceTree = "<group>"; };
+		FA2B0E0618931E4E00A448E7 /* NSObject+GFJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+GFJson.h"; sourceTree = "<group>"; };
+		FA2B0E0718931E4E00A448E7 /* NSObject+GFJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+GFJson.m"; sourceTree = "<group>"; };
+		FA2B0E0A1893245E00A448E7 /* GitHubApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GitHubApi.h; path = GFTestApp/GitHubApi.h; sourceTree = SOURCE_ROOT; };
+		FA2B0E0B1893245E00A448E7 /* GitHubApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GitHubApi.m; path = GFTestApp/GitHubApi.m; sourceTree = SOURCE_ROOT; };
+		FA2D71B31892FF18002DD173 /* GoldenFleece.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoldenFleece.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA2D71B61892FF18002DD173 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		FA2D71B91892FF18002DD173 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		FA2D71BA1892FF18002DD173 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		FA2D71BB1892FF18002DD173 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		FA2D71BE1892FF18002DD173 /* GoldenFleece-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoldenFleece-Info.plist"; path = "../GFTestApp/GoldenFleece-Info.plist"; sourceTree = "<group>"; };
+		FA2D71C01892FF18002DD173 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		FA2D71C21892FF18002DD173 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ../GFTestApp/main.m; sourceTree = "<group>"; };
+		FA2D71C41892FF18002DD173 /* GoldenFleece-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "GoldenFleece-Prefix.pch"; path = "../GFTestApp/GoldenFleece-Prefix.pch"; sourceTree = "<group>"; };
+		FA2D71C61892FF18002DD173 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		FA2D71C81892FF18002DD173 /* GFAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GFAppDelegate.h; path = ../GFTestApp/GFAppDelegate.h; sourceTree = "<group>"; };
+		FA2D71C91892FF18002DD173 /* GFAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = GFAppDelegate.m; path = ../GFTestApp/GFAppDelegate.m; sourceTree = "<group>"; };
+		FA2D71CC1892FF18002DD173 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		FA2D71CE1892FF18002DD173 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ../GFTestApp/Images.xcassets; sourceTree = "<group>"; };
+		FA2D71D41892FF18002DD173 /* GoldenFleeceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GoldenFleeceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA2D71D51892FF18002DD173 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		FA2D71DC1892FF18002DD173 /* GoldenFleeceTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = "GoldenFleeceTests-Info.plist"; path = "GFTestAppTests/GoldenFleeceTests-Info.plist"; sourceTree = "<group>"; };
+		FA2D71DE1892FF18002DD173 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		FA2D71E01892FF18002DD173 /* GoldenFleeceTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = GoldenFleeceTests.m; path = GFTestAppTests/GoldenFleeceTests.m; sourceTree = "<group>"; };
+		FA2D71EA1893106D002DD173 /* GFFindUserWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GFFindUserWindowController.h; path = GFTestApp/GFFindUserWindowController.h; sourceTree = SOURCE_ROOT; };
+		FA2D71EB1893106D002DD173 /* GFFindUserWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GFFindUserWindowController.m; path = GFTestApp/GFFindUserWindowController.m; sourceTree = SOURCE_ROOT; };
+		FA2D71EC1893106D002DD173 /* GFFindUserWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GFFindUserWindowController.xib; path = GFTestApp/GFFindUserWindowController.xib; sourceTree = SOURCE_ROOT; };
+		FA9BCC19EF1E4EF3BAE7BCF3 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FA2D71B01892FF18002DD173 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA2D71B71892FF18002DD173 /* Cocoa.framework in Frameworks */,
+				12D7C68C64C44189BEE937F5 /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA2D71D11892FF18002DD173 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA2D71D71892FF18002DD173 /* Cocoa.framework in Frameworks */,
+				FA2D71D61892FF18002DD173 /* XCTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FA2B0DFF18931DA700A448E7 /* GitHub Model */ = {
+			isa = PBXGroup;
+			children = (
+				FA2B0E0018931DCC00A448E7 /* GitHubComment.h */,
+				FA2B0E0118931DCC00A448E7 /* GitHubComment.m */,
+			);
+			name = "GitHub Model";
+			sourceTree = "<group>";
+		};
+		FA2B0E0318931E4E00A448E7 /* GoldenFleece */ = {
+			isa = PBXGroup;
+			children = (
+				FA2B0E0418931E4E00A448E7 /* GFClient.h */,
+				FA2B0E0518931E4E00A448E7 /* GFClient.m */,
+				FA2B0E0618931E4E00A448E7 /* NSObject+GFJson.h */,
+				FA2B0E0718931E4E00A448E7 /* NSObject+GFJson.m */,
+			);
+			path = GoldenFleece;
+			sourceTree = "<group>";
+		};
+		FA2D71AA1892FF18002DD173 = {
+			isa = PBXGroup;
+			children = (
+				FA2B0E0318931E4E00A448E7 /* GoldenFleece */,
+				FA2D71BC1892FF18002DD173 /* GFTestApp */,
+				FA2D71DA1892FF18002DD173 /* GFTestAppTests */,
+				FA2D71B51892FF18002DD173 /* Frameworks */,
+				FA2D71B41892FF18002DD173 /* Products */,
+				4ACEF1A5F31340C5BA7DAEA8 /* Pods.xcconfig */,
+			);
+			sourceTree = "<group>";
+		};
+		FA2D71B41892FF18002DD173 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FA2D71B31892FF18002DD173 /* GoldenFleece.app */,
+				FA2D71D41892FF18002DD173 /* GoldenFleeceTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FA2D71B51892FF18002DD173 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FA2D71B61892FF18002DD173 /* Cocoa.framework */,
+				FA2D71D51892FF18002DD173 /* XCTest.framework */,
+				FA2D71B81892FF18002DD173 /* Other Frameworks */,
+				FA9BCC19EF1E4EF3BAE7BCF3 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FA2D71B81892FF18002DD173 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FA2D71B91892FF18002DD173 /* AppKit.framework */,
+				FA2D71BA1892FF18002DD173 /* CoreData.framework */,
+				FA2D71BB1892FF18002DD173 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		FA2D71BC1892FF18002DD173 /* GFTestApp */ = {
+			isa = PBXGroup;
+			children = (
+				FA2B0E0A1893245E00A448E7 /* GitHubApi.h */,
+				FA2B0E0B1893245E00A448E7 /* GitHubApi.m */,
+				FA2B0DFF18931DA700A448E7 /* GitHub Model */,
+				FA2D71C81892FF18002DD173 /* GFAppDelegate.h */,
+				FA2D71C91892FF18002DD173 /* GFAppDelegate.m */,
+				FA2D71CB1892FF18002DD173 /* MainMenu.xib */,
+				FA2D71CE1892FF18002DD173 /* Images.xcassets */,
+				FA2D71BD1892FF18002DD173 /* Supporting Files */,
+				FA2B0DFA18931BDE00A448E7 /* GFGistCommentWindowController.h */,
+				FA2B0DFB18931BDE00A448E7 /* GFGistCommentWindowController.m */,
+				FA2B0DFC18931BDE00A448E7 /* GFGistCommentWindowController.xib */,
+				FA2D71EA1893106D002DD173 /* GFFindUserWindowController.h */,
+				FA2D71EB1893106D002DD173 /* GFFindUserWindowController.m */,
+				FA2D71EC1893106D002DD173 /* GFFindUserWindowController.xib */,
+			);
+			name = GFTestApp;
+			path = GoldenFleece;
+			sourceTree = "<group>";
+		};
+		FA2D71BD1892FF18002DD173 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FA2D71BE1892FF18002DD173 /* GoldenFleece-Info.plist */,
+				FA2D71BF1892FF18002DD173 /* InfoPlist.strings */,
+				FA2D71C21892FF18002DD173 /* main.m */,
+				FA2D71C41892FF18002DD173 /* GoldenFleece-Prefix.pch */,
+				FA2D71C51892FF18002DD173 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FA2D71DA1892FF18002DD173 /* GFTestAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				FA2D71E01892FF18002DD173 /* GoldenFleeceTests.m */,
+				FA2D71DB1892FF18002DD173 /* Supporting Files */,
+			);
+			name = GFTestAppTests;
+			path = GoldenFleeceTests;
+			sourceTree = "<group>";
+		};
+		FA2D71DB1892FF18002DD173 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FA2D71DC1892FF18002DD173 /* GoldenFleeceTests-Info.plist */,
+				FA2D71DD1892FF18002DD173 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FA2D71B21892FF18002DD173 /* GoldenFleece */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FA2D71E41892FF18002DD173 /* Build configuration list for PBXNativeTarget "GoldenFleece" */;
+			buildPhases = (
+				BD31BBCAF68245D095F47E1A /* Check Pods Manifest.lock */,
+				FA2D71AF1892FF18002DD173 /* Sources */,
+				FA2D71B01892FF18002DD173 /* Frameworks */,
+				FA2D71B11892FF18002DD173 /* Resources */,
+				2666FB8F8C0742C18BEB2540 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GoldenFleece;
+			productName = GoldenFleece;
+			productReference = FA2D71B31892FF18002DD173 /* GoldenFleece.app */;
+			productType = "com.apple.product-type.application";
+		};
+		FA2D71D31892FF18002DD173 /* GoldenFleeceTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FA2D71E71892FF18002DD173 /* Build configuration list for PBXNativeTarget "GoldenFleeceTests" */;
+			buildPhases = (
+				FA2D71D01892FF18002DD173 /* Sources */,
+				FA2D71D11892FF18002DD173 /* Frameworks */,
+				FA2D71D21892FF18002DD173 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FA2D71D91892FF18002DD173 /* PBXTargetDependency */,
+			);
+			name = GoldenFleeceTests;
+			productName = GoldenFleeceTests;
+			productReference = FA2D71D41892FF18002DD173 /* GoldenFleeceTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FA2D71AB1892FF18002DD173 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = GF;
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Alex Nauda";
+				TargetAttributes = {
+					FA2D71D31892FF18002DD173 = {
+						TestTargetID = FA2D71B21892FF18002DD173;
+					};
+				};
+			};
+			buildConfigurationList = FA2D71AE1892FF18002DD173 /* Build configuration list for PBXProject "GoldenFleece" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FA2D71AA1892FF18002DD173;
+			productRefGroup = FA2D71B41892FF18002DD173 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FA2D71B21892FF18002DD173 /* GoldenFleece */,
+				FA2D71D31892FF18002DD173 /* GoldenFleeceTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FA2D71B11892FF18002DD173 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA2D71C11892FF18002DD173 /* InfoPlist.strings in Resources */,
+				FA2D71CF1892FF18002DD173 /* Images.xcassets in Resources */,
+				FA2D71C71892FF18002DD173 /* Credits.rtf in Resources */,
+				FA2B0DFE18931BDE00A448E7 /* GFGistCommentWindowController.xib in Resources */,
+				FA2D71CD1892FF18002DD173 /* MainMenu.xib in Resources */,
+				FA2D71EE1893106D002DD173 /* GFFindUserWindowController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA2D71D21892FF18002DD173 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA2D71DF1892FF18002DD173 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2666FB8F8C0742C18BEB2540 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BD31BBCAF68245D095F47E1A /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FA2D71AF1892FF18002DD173 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA2D71ED1893106D002DD173 /* GFFindUserWindowController.m in Sources */,
+				FA2B0E0218931DCC00A448E7 /* GitHubComment.m in Sources */,
+				FA2B0DFD18931BDE00A448E7 /* GFGistCommentWindowController.m in Sources */,
+				FA2B0E0C1893245E00A448E7 /* GitHubApi.m in Sources */,
+				FA2D71C31892FF18002DD173 /* main.m in Sources */,
+				FA2D71CA1892FF18002DD173 /* GFAppDelegate.m in Sources */,
+				FA2B0E0818931E4E00A448E7 /* GFClient.m in Sources */,
+				FA2B0E0918931E4E00A448E7 /* NSObject+GFJson.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA2D71D01892FF18002DD173 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA2D71E11892FF18002DD173 /* GoldenFleeceTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FA2D71D91892FF18002DD173 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FA2D71B21892FF18002DD173 /* GoldenFleece */;
+			targetProxy = FA2D71D81892FF18002DD173 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		FA2D71BF1892FF18002DD173 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FA2D71C01892FF18002DD173 /* en */,
+			);
+			name = InfoPlist.strings;
+			path = ../GFTestApp;
+			sourceTree = "<group>";
+		};
+		FA2D71C51892FF18002DD173 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FA2D71C61892FF18002DD173 /* en */,
+			);
+			name = Credits.rtf;
+			path = ../GFTestApp;
+			sourceTree = "<group>";
+		};
+		FA2D71CB1892FF18002DD173 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FA2D71CC1892FF18002DD173 /* Base */,
+			);
+			name = MainMenu.xib;
+			path = ../GFTestApp;
+			sourceTree = "<group>";
+		};
+		FA2D71DD1892FF18002DD173 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FA2D71DE1892FF18002DD173 /* en */,
+			);
+			name = InfoPlist.strings;
+			path = GFTestAppTests;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FA2D71E21892FF18002DD173 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		FA2D71E31892FF18002DD173 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		FA2D71E51892FF18002DD173 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4ACEF1A5F31340C5BA7DAEA8 /* Pods.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GFTestApp/GoldenFleece-Prefix.pch";
+				INFOPLIST_FILE = "GFTestApp/GoldenFleece-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		FA2D71E61892FF18002DD173 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4ACEF1A5F31340C5BA7DAEA8 /* Pods.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GFTestApp/GoldenFleece-Prefix.pch";
+				INFOPLIST_FILE = "GFTestApp/GoldenFleece-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		FA2D71E81892FF18002DD173 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/GoldenFleece.app/Contents/MacOS/GoldenFleece";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GoldenFleece/GoldenFleece-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "GoldenFleeceTests/GoldenFleeceTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		FA2D71E91892FF18002DD173 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/GoldenFleece.app/Contents/MacOS/GoldenFleece";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GoldenFleece/GoldenFleece-Prefix.pch";
+				INFOPLIST_FILE = "GoldenFleeceTests/GoldenFleeceTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FA2D71AE1892FF18002DD173 /* Build configuration list for PBXProject "GoldenFleece" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA2D71E21892FF18002DD173 /* Debug */,
+				FA2D71E31892FF18002DD173 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FA2D71E41892FF18002DD173 /* Build configuration list for PBXNativeTarget "GoldenFleece" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA2D71E51892FF18002DD173 /* Debug */,
+				FA2D71E61892FF18002DD173 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FA2D71E71892FF18002DD173 /* Build configuration list for PBXNativeTarget "GoldenFleeceTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA2D71E81892FF18002DD173 /* Debug */,
+				FA2D71E91892FF18002DD173 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FA2D71AB1892FF18002DD173 /* Project object */;
+}
