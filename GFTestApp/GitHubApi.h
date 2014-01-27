@@ -4,7 +4,7 @@
 
 @protocol GFPostGistCommentCaller <NSObject>
 @required
-- (void) postGistCommentSucceeded:(NSArray*)comments;
+- (void) postGistCommentSucceeded:(GitHubComment*)comments;
 - (void) postGistCommentError:(NSError*)error;
 @end
 

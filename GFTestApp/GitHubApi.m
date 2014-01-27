@@ -30,10 +30,10 @@
     [self.gf jsonRequestWithObject:comment // <-- this will be converted to JSON and sent as the request entity body
                                path:[NSString stringWithFormat:@"gists/%@/comments", gistId] // <-- this is relative to the baseUrl used when instantiating AFHTTPClient
                              method:@"POST"
-                      expectedClass:[GitHubComment class] // <-- this request returns a JSON array; specify the class you want GFClient to instantiate for the array elements
+                      expectedClass:[GitHubComment class] // <-- this request returns a JSON object; pass in the class to instantiate and populate from it
                             success:^(NSURLRequest *request, NSHTTPURLResponse *response, id object) {
-                                NSArray *results = (NSArray*)object;
-                                [delegate postGistCommentSucceeded:results];
+                                GitHubComment *result = (GitHubComment*)object;
+                                [delegate postGistCommentSucceeded:result];
                             } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
                                 [delegate postGistCommentError:error];
                             }

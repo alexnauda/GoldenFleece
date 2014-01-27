@@ -31,11 +31,9 @@
     [[GitHubApi sharedInstance] postGistComment:comment forGist:self.gistIdTextField.stringValue delegate:self];
 }
 
-- (void)postGistCommentSucceeded:(NSArray *)comments {
-    if (comments) {
-        for (GitHubComment *comment in comments) {
-            NSLog(@"gist comment: %@", comment.body);
-        }
+- (void)postGistCommentSucceeded:(GitHubComment *)comment {
+    if (comment) {
+        NSLog(@"gist comment: %@", comment.body);
     } else {
         NSLog(@"post gist comment result was nil");
     }
