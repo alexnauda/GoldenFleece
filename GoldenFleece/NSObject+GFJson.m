@@ -51,10 +51,17 @@
             // populate self from this dictionary, which represents self in JSON object notation
             NSDictionary *props = [self getPropertiesAndClasses];
             for (NSString *jsonName in [dict allKeys]) {
-                Class propertyClass = [props objectForKey:jsonName];
+                NSString *mappingPropertyName = [[self jsonMapping] objectForKey:jsonName];
+                NSString *propertyName;
+                if (mappingPropertyName) {
+                    propertyName = mappingPropertyName;
+                } else {
+                    propertyName = jsonName;
+                }
+                Class propertyClass = [props objectForKey:propertyName];
                 if (propertyClass) {
                     id propertyValue = [[propertyClass alloc] initWithJsonObject:[dict objectForKey:jsonName]];
-                    [self setValue:propertyValue forKey:jsonName];
+                    [self setValue:propertyValue forKey:propertyName];
                 } else {
                     debug(@"did not find a property in class %@ that matches JSON name %@", [self class], jsonName);
                 }
@@ -113,16 +120,29 @@
         // any NSObject subclass
         NSDictionary *props = [self getPropertiesAndClasses];
         NSMutableDictionary *result = [[NSMutableDictionary alloc] initWithCapacity:[props count]];
+        NSDictionary *reverseMapping = [self reverseMapping];
         for (NSString *propName in [props allKeys]) {
+            NSString *jsonName = [reverseMapping objectForKey:propName];
+            if (!jsonName) {
+                jsonName = propName;
+            }
             id propValue = [self valueForKeyPath:propName];
             if (propValue) {
-                [result setObject:[propValue jsonObject] forKey:propName];
+                [result setObject:[propValue jsonObject] forKey:jsonName];
             } else {
-                [result setObject:[NSNull null] forKey:propName];
+                [result setObject:[NSNull null] forKey:jsonName];
             }
         }
         return result;
     }
+}
+
+- (NSDictionary*)reverseMapping {
+    NSMutableDictionary *result = [[NSMutableDictionary alloc] initWithCapacity:[[self jsonMapping] count]];
+    for (NSString *jsonName in [self jsonMapping]) {
+        [result setObject:jsonName forKey:[[self jsonMapping] objectForKey:jsonName]];
+    }
+    return result;
 }
 
 - (NSDictionary*)getPropertiesAndClasses {
@@ -173,6 +193,25 @@
     [self isKindOfClass:[NSString class]] ||
     [self isKindOfClass:[NSNumber class]] ||
     [self isKindOfClass:[NSNull class]];
+}
+
+/*
+ Override this method if the properties in your custom object do not match the keys in
+ the JSON object. For example, if the JSON object contains keys that are disallowed in
+ Objective-C, you may need to names those properties differently in your object.
+ 
+ Return an NSDictionary in which the keys correspond to the JSON keys and the values
+ correspond to your property names.
+ 
+ Example:
+ - (NSDictionary*)jsonMapping {
+    return @{
+             "signed" : "isSigned"
+             }
+ }
+ */
+- (NSDictionary*)jsonMapping {
+    return @{};
 }
 
 @end
