@@ -24,6 +24,25 @@
 
 - (IBAction)findButtonClicked:(id)sender {
     NSLog(@"find gist %@", self.gistIdTextField.stringValue);
+    [[GitHubApi sharedInstance] getGist:self.gistIdTextField.stringValue delegate:self];
+    
+}
+
+- (void)getGistSucceeded:(GitHubGist *)gist {
+    if (gist) {
+        NSLog(@"gist: %@ with %ld forks", gist, [gist.forks count]);
+        if ([gist.forks count]) {
+            for (GitHubGist *fork in gist.forks) {
+                NSLog(@"  fork: %@", fork);
+            }
+        }
+    } else {
+        NSLog(@"get gist result was nil");
+    }
+}
+
+- (void)getGistError:(NSError *)error {
+    NSLog(@"get gist failed: %@", [error localizedDescription]);
 }
 
 @end

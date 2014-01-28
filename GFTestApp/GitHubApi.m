@@ -40,4 +40,18 @@
      ];
 }
 
+- (void)getGist:(NSString*)gistId delegate:(id<GFGetGistCaller>)delegate {
+    [self.gf jsonRequestWithObject:nil // <-- this is a get, so no JSON is expected in the request entity body
+                              path:[NSString stringWithFormat:@"gists/%@", gistId] // <-- this is relative to the baseUrl used when instantiating AFHTTPClient
+                            method:@"GET"
+                     expectedClass:[GitHubGist class] // <-- this request returns a JSON object; pass in the class to instantiate and populate from it
+                           success:^(NSURLRequest *request, NSHTTPURLResponse *response, id object) {
+                               GitHubGist *result = (GitHubGist*)object;
+                               [delegate getGistSucceeded:result];
+                           } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                               [delegate getGistError:error];
+                           }
+     ];
+}
+
 @end
