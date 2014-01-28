@@ -25,19 +25,24 @@
          */
         debug(@"returning object of class %@", [jsonObject class]);
         return jsonObject;
-    } else if ([jsonObject isKindOfClass:[NSArray class]] && ![self isKindOfClass:[NSArray class]]) {
+    } else if ([jsonObject isKindOfClass:[NSArray class]]) {
         /*
          * JSON array (return an NSArray)
          */
-        // the JSON contained an array, but I'm not an array; we'll instantate an array with my class as elements
-        NSArray *jsonArray = (NSArray*)jsonObject;
-        NSMutableArray *results = [[NSMutableArray alloc] initWithCapacity:jsonArray.count];
-        for (id jsonElem in jsonArray) {
-            id elem = [[[self class] alloc] initWithJsonObject:jsonElem];
-            [results addObject:elem];
+        if ([self isKindOfClass:[NSArray class]]) {
+            // return the array plain and simple
+            return jsonObject;
+        } else {
+            // the JSON contained an array, but I'm not an array; we'll instantate an array with my class as elements
+            NSArray *jsonArray = (NSArray*)jsonObject;
+            NSMutableArray *results = [[NSMutableArray alloc] initWithCapacity:jsonArray.count];
+            for (id jsonElem in jsonArray) {
+                id elem = [[[self class] alloc] initWithJsonObject:jsonElem];
+                [results addObject:elem];
+            }
+            debug(@"returning object of class %@", [results class]);
+            return results;
         }
-        debug(@"returning object of class %@", [results class]);
-        return results;
     } else if ([jsonObject isKindOfClass:[NSDictionary class]]) {
         /*
          * JSON object
@@ -51,6 +56,7 @@
             // populate self from this dictionary, which represents self in JSON object notation
             NSDictionary *props = [self getPropertiesAndClasses];
             for (NSString *jsonName in [dict allKeys]) {
+                // check jsonMapping for any special configuration on this field
                 NSString *mappingPropertyName = [[self jsonMapping] objectForKey:jsonName];
                 NSString *propertyName;
                 if (mappingPropertyName) {
@@ -58,10 +64,28 @@
                 } else {
                     propertyName = jsonName;
                 }
+                
+                // look at the class of the property itself
                 Class propertyClass = [props objectForKey:propertyName];
+
+                // check jsonClasses for any special configuration on this field
+                Class jsonClass = [self getJsonClass:propertyName];
+                Class instantiateClass = jsonClass ? jsonClass : propertyClass;
                 if (propertyClass) {
-                    id propertyValue = [[propertyClass alloc] initWithJsonObject:[dict objectForKey:jsonName]];
-                    [self setValue:propertyValue forKey:propertyName];
+                    if ([propertyClass isSubclassOfClass:[NSDictionary class]] && jsonClass && ![jsonClass isSubclassOfClass:[NSDictionary class]]) {
+                        // special case: normally we try to instantiate an NSDictionary as a custom class
+                        NSMutableDictionary *result = [[NSMutableDictionary alloc] initWithCapacity:[dict count]];
+                        for (NSString *key in [dict allKeys]) {
+                            id customValue = [[instantiateClass alloc] initWithJsonObject:[dict objectForKey:jsonName]];
+                            [result setObject:customValue forKey:key];
+                        }
+                        debug(@"returning object of class %@", result);
+                        return result;
+                    } else {
+                        // this block handles both custom classes and NSArrays
+                        id propertyValue = [[instantiateClass alloc] initWithJsonObject:[dict objectForKey:jsonName]];
+                        [self setValue:propertyValue forKey:propertyName];
+                    }
                 } else {
                     debug(@"did not find a property in class %@ that matches JSON name %@", [self class], jsonName);
                 }
@@ -74,6 +98,27 @@
         debug(@"returning nil");
         return nil;
     }
+}
+
+- (Class)getJsonClass:(NSString*)propertyName {
+    Class jsonClass = [[self jsonClasses] objectForKey:propertyName];
+    if (!jsonClass) {
+        // support legacy GoldenFleece functionality that was based on NSObject+AutomagicCoding
+        SEL selector = sel_registerName("AMCElementClassForCollectionWithKey:");
+        if ([self respondsToSelector:selector]) {
+            
+            // if you don't understand this part, please read http://stackoverflow.com/a/20058585/318912
+            IMP imp = [self methodForSelector:selector];
+            Class (*func)(id, SEL, NSString*) = (void *)imp;
+            jsonClass = func(self, selector, propertyName);
+            
+            if (jsonClass == [NSObject class]) {
+                // the legacy method returned NSObject as the default, but here we expect nil as the default
+                jsonClass = nil;
+            }
+        }
+    }
+    return jsonClass;
 }
 
 /*
@@ -164,16 +209,14 @@
             debug(@"ERROR property %@ has type float, which is not supported", propertyName);
         } else if (strcmp(rawPropertyType, @encode(int)) == 0) {
             debug(@"ERROR property %@ has type int, which is not supported", propertyName);
-        } else if ([@"@\"NSString\"" isEqualToString:propertyType] || [@"@\"NSNumber\"" isEqualToString:propertyType] || [@"@\"NSNull\"" isEqualToString:propertyType] || strcmp(rawPropertyType, @encode(id)) == 0) {
-            if ([typeAttribute hasPrefix:@"T@"] && [typeAttribute length] > 1) {
-                NSString * className = [typeAttribute substringWithRange:NSMakeRange(3, [typeAttribute length]-4)];  // remove @"..."
-                debug(@"property %@ has class %@", propertyName, className);
-                Class clazz = NSClassFromString(className);
-                if (clazz != nil) {
-                    [result setObject:clazz forKey:propertyName];
-                } else {
-                    debug(@"ERROR could not get class of property %@", propertyName);
-                }
+        } else if ([typeAttribute hasPrefix:@"T@"] && [typeAttribute length] > 1) {
+            NSString * className = [typeAttribute substringWithRange:NSMakeRange(3, [typeAttribute length]-4)];  // remove T@"..."
+            debug(@"property %@ has class %@", propertyName, className);
+            Class clazz = NSClassFromString(className);
+            if (clazz != nil) {
+                [result setObject:clazz forKey:propertyName];
+            } else {
+                debug(@"ERROR could not get class of property %@", propertyName);
             }
         } else {
             debug(@"ERROR property %@ has unrecognized type %s", propertyName, rawPropertyType);
@@ -193,6 +236,27 @@
     [self isKindOfClass:[NSString class]] ||
     [self isKindOfClass:[NSNumber class]] ||
     [self isKindOfClass:[NSNull class]];
+}
+
+/*
+ Override this method to specify an element class for NSArray or NSDictionary contents.
+ 
+ Return an NSDictionary of NSString : Class. While deserializing JSON, if GoldenFleece
+ encounters an NSArray or NSDictionary property with a name matching the key, it will
+ deserialize the contents by instantiating and populting the specified Class as a nested 
+ custom object for each element in the JSON array. Please note that the keys in this
+ dictionary correspond to the property names (not the JSON keys).
+ 
+ Example:
+ - (NSDictionary*)jsonClasses {
+    return @{
+             @"comments" : [MyComment class],
+             @"addresses" : [MyAddress class]
+             };
+ }
+ */
+- (NSDictionary*)jsonClasses {
+    return @{};
 }
 
 /*
