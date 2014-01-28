@@ -5,9 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="GFFindUserControllerWindowController">
+        <customObject id="-2" userLabel="File's Owner" customClass="GFGistWindowController">
             <connections>
                 <outlet property="findButton" destination="rwu-pr-al3" id="kQm-Mv-UAh"/>
+                <outlet property="gistIdTextField" destination="aMN-zM-Kad" id="AW0-Iv-Mcy"/>
                 <outlet property="usernameTextField" destination="aMN-zM-Kad" id="WJv-yx-dlj"/>
                 <outlet property="window" destination="1" id="3"/>
             </connections>
@@ -24,32 +25,32 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xUx-uA-ThV">
-                        <rect key="frame" x="17" y="452" width="118" height="17"/>
+                        <rect key="frame" x="17" y="452" width="33" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="GitHub username:" id="ZvU-We-qz2">
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Gist:" id="ZvU-We-qz2">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aMN-zM-Kad">
-                        <rect key="frame" x="140" y="449" width="193" height="22"/>
+                        <rect key="frame" x="55" y="450" width="97" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="M3T-Wa-1oI">
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" title="8606452" drawsBackground="YES" id="M3T-Wa-1oI">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rwu-pr-al3">
-                        <rect key="frame" x="335" y="443" width="67" height="32"/>
+                        <rect key="frame" x="154" y="443" width="67" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="Find" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="0Ry-iV-BTP">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
-                            <action selector="findButtonClicked:" target="-2" id="I7a-Ij-VOm"/>
+                            <action selector="findButtonClicked:" target="-2" id="gwS-92-OeP"/>
                         </connections>
                     </button>
                 </subviews>

@@ -1,10 +1,10 @@
-#import "GFFindUserWindowController.h"
+#import "GFGistWindowController.h"
 
-@interface GFFindUserWindowController ()
+@interface GFGistWindowController ()
 
 @end
 
-@implementation GFFindUserWindowController
+@implementation GFGistWindowController
 
 - (id)initWithWindow:(NSWindow *)window
 {
@@ -23,5 +23,7 @@
 }
 
 - (IBAction)findButtonClicked:(id)sender {
+    NSLog(@"find gist %@", self.gistIdTextField.stringValue);
 }
+
 @end

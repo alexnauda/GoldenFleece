@@ -659,12 +659,12 @@
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="75u-w1-yL7">
                         <rect key="frame" x="14" y="43" width="162" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="push" title="GitHub User Test" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="WBH-Wb-MMQ">
+                        <buttonCell key="cell" type="push" title="Gist Test" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="WBH-Wb-MMQ">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
-                            <action selector="gitHubUserTestClicked:" target="494" id="Fc5-MN-bKB"/>
+                            <action selector="gistTestClicked:" target="494" id="ftZ-SR-4xA"/>
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kA2-zW-cra">

@@ -2,7 +2,7 @@
 
 @implementation GFAppDelegate
 
-@synthesize findUserWindowController = _findUserWindowController;
+@synthesize gistWindowController = _gistWindowController;
 @synthesize gistCommentWindowController = _gistCommentWindowController;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
@@ -13,11 +13,11 @@
     GFClient __unused *gf = [GFClient createWithHttpClient:client];
 }
 
-- (GFFindUserWindowController*)findUserWindowController {
-    if (!_findUserWindowController) {
-        _findUserWindowController = [[GFFindUserWindowController alloc] initWithWindowNibName:@"GFFindUserWindowController"];
+- (GFGistWindowController*)gistWindowController {
+    if (!_gistWindowController) {
+        _gistWindowController = [[GFGistWindowController alloc] initWithWindowNibName:@"GFGistWindowController"];
     }
-    return _findUserWindowController;
+    return _gistWindowController;
 }
 
 - (GFGistCommentWindowController*)gistCommentWindowController {
@@ -27,8 +27,8 @@
     return _gistCommentWindowController;
 }
 
-- (IBAction)gitHubUserTestClicked:(id)sender {
-    [self.findUserWindowController showWindow:self];
+- (IBAction)gistTestClicked:(id)sender {
+    [self.gistWindowController showWindow:self];
 }
 
 - (IBAction)gistCommentTestClicked:(id)sender {
