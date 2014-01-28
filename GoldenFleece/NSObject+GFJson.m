@@ -2,7 +2,7 @@
 #import <objc/runtime.h>
 
 // log macros (adding features to NSLog) that output the code line number
-// debug() is enabled by the DEBUG compilation flag, which is set by default when you run in Xcode
+// debug() is enabled by a compilation flag
 #ifdef DEBUG
 #   define debug(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
 #else
@@ -14,6 +14,9 @@
 
 @implementation NSObject (GFJson)
 
+/*
+ Populates an NSObject from a JSON object
+ */
 - (id)initWithJsonObject:(id)jsonObject {
     debug(@"examining jsonObject of class %@", [jsonObject class]);
     if ([self isJsonPrimitive] && [jsonObject isJsonPrimitive]) {
@@ -67,12 +70,13 @@
 }
 
 /*
- An object that may be converted to JSON must have the following properties:
+ Converts an NSObject to a JSON object, which Apple defines as...
  
+ "An object that may be converted to JSON must have the following properties:
  The top level object is an NSArray or NSDictionary.
  All objects are instances of NSString, NSNumber, NSArray, NSDictionary, or NSNull.
  All dictionary keys are instances of NSString.
- Numbers are not NaN or infinity.
+ Numbers are not NaN or infinity."
  */
 - (id)jsonObject {
     if ([self isKindOfClass:[NSArray class]]) {
