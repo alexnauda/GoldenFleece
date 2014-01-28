@@ -11,6 +11,16 @@
 #import <ISO8601DateFormatter.h>
 #import "NSObject+GFJson.h"
 
+// log macros (adding features to NSLog) that output the code line number
+// debug() is enabled by a compilation flag
+#ifdef DEBUG
+#   define debug(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+#else
+#   define debug(...)
+#endif
+// info() always displays
+#define info(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+
 static ISO8601DateFormatter *formatter;
 
 @implementation GFClient {
@@ -81,10 +91,10 @@ static ISO8601DateFormatter *formatter;
     if (object) {
         jsonData = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&error];
         if(jsonData == NULL) {
-            NSLog(@"Unable to serialize request body.  Error: %@, info: %@", error, [error userInfo]);
+            info(@"Unable to serialize request body.  Error: %@, info: %@", error, [error userInfo]);
             failure(nil, nil, error);
         } else {
-            NSLog(@"JSON data: %@", [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]);
+            debug(@"Sending JSON data: %@", [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]);
         }
     }
     [self jsonRequestWithData:jsonData path:path method:method expectedClass:class success:success failure:failure background:background];
@@ -113,16 +123,17 @@ static ISO8601DateFormatter *formatter;
     NSMutableURLRequest *request = [self.httpClient requestWithMethod:method path:path parameters:nil];
     [request setHTTPBody:data];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    // NSLog(@"post data: %@", [[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]);
+    // debug(@"post data: %@", [[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]);
     
     // now run it
     AFJSONRequestOperation *operation =
         [AFJSONRequestOperation JSONRequestOperationWithRequest:request
-                                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-                                                            id object = [[class alloc] initWithJsonObject:(NSDictionary*)JSON];
+                                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, id json) {
+                                                            id object = [[class alloc] initWithJsonObject:json];
+                                                            debug(@"Received JSON object %@", json);
                                                             success(request, response, object);
                                                         }
-                                                        failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+                                                        failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id json) {
                                                             failure(request, response, error);
                                                         }];
     if (self.additionalAcceptableContentTypes) {
@@ -153,11 +164,12 @@ static ISO8601DateFormatter *formatter;
     NSMutableURLRequest *request = [self.httpClient requestWithMethod:method path:path parameters:parameters];
     AFJSONRequestOperation *operation =
     [AFJSONRequestOperation JSONRequestOperationWithRequest:request
-                                                    success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-                                                        id object = [[class alloc] initWithJsonObject:(NSDictionary*)JSON];
+                                                    success:^(NSURLRequest *request, NSHTTPURLResponse *response, id json) {
+                                                        id object = [[class alloc] initWithJsonObject:json];
+                                                        debug(@"Received JSON object %@", json);
                                                         success(request, response, object);
                                                     }
-                                                    failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+                                                    failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id json) {
                                                         failure(request, response, error);
                                                     }];
     if (self.additionalAcceptableContentTypes) {
