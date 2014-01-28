@@ -262,6 +262,21 @@
 }
 
 /*
+ Override this method to ignore properties/keys in both serialization and deserialization
+ 
+ Return an NSArray of NSString values. GoldenFleece will ignore any JSON object keys and/or
+ properties with matching names.
+ 
+ Example: Ignore the password and email properties when serializing and object to JSON
+ - (NSArray*)jsonIgnore {
+    return @[@"password", @"email"];
+ }
+ */
+- (NSArray*)jsonIgnore {
+    return @[];
+}
+
+/*
  Override this method to specify an element class for NSArray or NSDictionary contents.
  
  Return an NSDictionary of NSString : Class. While deserializing JSON, if GoldenFleece
