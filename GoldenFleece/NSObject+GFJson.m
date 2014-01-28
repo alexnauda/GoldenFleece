@@ -206,7 +206,7 @@
  Example:
  - (NSDictionary*)jsonMapping {
     return @{
-             "signed" : "isSigned"
+             @"signed" : @"isSigned"
              }
  }
  */
