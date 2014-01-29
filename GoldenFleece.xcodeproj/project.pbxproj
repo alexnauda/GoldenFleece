@@ -27,6 +27,7 @@
 		FA2D71E11892FF18002DD173 /* GoldenFleeceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FA2D71E01892FF18002DD173 /* GoldenFleeceTests.m */; };
 		FA2D71ED1893106D002DD173 /* GFGistWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA2D71EB1893106D002DD173 /* GFGistWindowController.m */; };
 		FA2D71EE1893106D002DD173 /* GFGistWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA2D71EC1893106D002DD173 /* GFGistWindowController.xib */; };
+		FA74D8721899A0FE00D71EAD /* GFDateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA74D8711899A0FE00D71EAD /* GFDateFormatter.m */; };
 		FA98CAB918984779002FAA33 /* GitHubGist.m in Sources */ = {isa = PBXBuildFile; fileRef = FA98CAB818984779002FAA33 /* GitHubGist.m */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +76,8 @@
 		FA2D71EA1893106D002DD173 /* GFGistWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GFGistWindowController.h; path = GFTestApp/GFGistWindowController.h; sourceTree = SOURCE_ROOT; };
 		FA2D71EB1893106D002DD173 /* GFGistWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GFGistWindowController.m; path = GFTestApp/GFGistWindowController.m; sourceTree = SOURCE_ROOT; };
 		FA2D71EC1893106D002DD173 /* GFGistWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GFGistWindowController.xib; path = GFTestApp/GFGistWindowController.xib; sourceTree = SOURCE_ROOT; };
+		FA74D8701899A0FE00D71EAD /* GFDateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFDateFormatter.h; sourceTree = "<group>"; };
+		FA74D8711899A0FE00D71EAD /* GFDateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFDateFormatter.m; sourceTree = "<group>"; };
 		FA98CAB718984779002FAA33 /* GitHubGist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GitHubGist.h; path = "GFTestApp/GitHub Model/GitHubGist.h"; sourceTree = SOURCE_ROOT; };
 		FA98CAB818984779002FAA33 /* GitHubGist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GitHubGist.m; path = "GFTestApp/GitHub Model/GitHubGist.m"; sourceTree = SOURCE_ROOT; };
 		FA9BCC19EF1E4EF3BAE7BCF3 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -120,6 +123,8 @@
 				FA2B0E0518931E4E00A448E7 /* GFClient.m */,
 				FA2B0E0618931E4E00A448E7 /* NSObject+GFJson.h */,
 				FA2B0E0718931E4E00A448E7 /* NSObject+GFJson.m */,
+				FA74D8701899A0FE00D71EAD /* GFDateFormatter.h */,
+				FA74D8711899A0FE00D71EAD /* GFDateFormatter.m */,
 			);
 			path = GoldenFleece;
 			sourceTree = "<group>";
@@ -358,6 +363,7 @@
 				FA2D71ED1893106D002DD173 /* GFGistWindowController.m in Sources */,
 				FA2B0E0218931DCC00A448E7 /* GitHubComment.m in Sources */,
 				FA2B0DFD18931BDE00A448E7 /* GFGistCommentWindowController.m in Sources */,
+				FA74D8721899A0FE00D71EAD /* GFDateFormatter.m in Sources */,
 				FA2B0E0C1893245E00A448E7 /* GitHubApi.m in Sources */,
 				FA2D71C31892FF18002DD173 /* main.m in Sources */,
 				FA2D71CA1892FF18002DD173 /* GFAppDelegate.m in Sources */,

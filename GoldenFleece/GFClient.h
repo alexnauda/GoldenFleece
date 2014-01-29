@@ -1,11 +1,3 @@
-//
-//  GFClient.h
-//  PurePractice
-//
-//  Created by Alex on 3/22/13.
-//  Copyright (c) 2013 Electronic Remedy, Inc. All rights reserved.
-//
-
 #import <Foundation/Foundation.h>
 #import <AFNetworking/AFNetworking.h>
 
@@ -62,5 +54,4 @@ typedef NSString* (^DateToStringBlock)(NSDate*);
 
 @property (strong, atomic) AFHTTPClient *httpClient;
 @property (strong, atomic) NSSet *additionalAcceptableContentTypes;
-@property (strong, atomic) DateToStringBlock dateToStringBlock;
 @end

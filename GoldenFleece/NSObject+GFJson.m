@@ -1,5 +1,6 @@
 #import "NSObject+GFJson.h"
 #import <objc/runtime.h>
+#import "GFDateFormatter.h"
 
 // log macros (adding features to NSLog) that output the code line number
 // debug() is enabled by a compilation flag
@@ -10,6 +11,7 @@
 #endif
 // info() always displays
 #define info(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+
 
 
 @implementation NSObject (GFJson)
@@ -25,6 +27,12 @@
          */
         debug(@"returning object of class %@", [jsonObject class]);
         return jsonObject;
+    } else if ([self isKindOfClass:[NSDate class]]) {
+        if ([jsonObject isKindOfClass:[NSString class]]) {
+            self = [self initWithDateString:(NSString*)jsonObject];
+        }
+        debug(@"returning object of class %@", [self class]);
+        return self;
     } else if ([jsonObject isKindOfClass:[NSArray class]]) {
         /*
          * JSON array (return an NSArray)
@@ -100,6 +108,10 @@
     }
 }
 
+- (id)initWithDateString:(NSString*)dateString {
+    return [[GFDateFormatter sharedInstance] dateFromString:dateString];
+}
+
 - (Class)getJsonClass:(NSString*)propertyName {
     Class jsonClass = [[self jsonClasses] objectForKey:propertyName];
     if (!jsonClass) {
@@ -138,7 +150,7 @@
     } else if ([self isJsonPrimitive]) {
         return self;
     } else if ([self isKindOfClass:[NSDate class]]) {
-        return [self dateToJsonString];
+        return [[GFDateFormatter sharedInstance] stringFromDate:(NSDate*)self];
     } else {
         return [self toJsonDictionary]; // any other NSObject subclass
     }
@@ -225,10 +237,6 @@
     free(props);
     
     return result;
-}
-
-- (NSString*)dateToJsonString {
-    return NULL;
 }
 
 - (BOOL)isJsonPrimitive {

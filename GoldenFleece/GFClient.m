@@ -1,14 +1,5 @@
-//
-//  GFClient.m
-//  PurePractice
-//
-//  Created by Alex on 3/22/13.
-//  Copyright (c) 2013 Electronic Remedy, Inc. All rights reserved.
-//
-
 #import "GFClient.h"
 #import <NSDate+Helper.h>
-#import <ISO8601DateFormatter.h>
 #import "NSObject+GFJson.h"
 
 // log macros (adding features to NSLog) that output the code line number
@@ -20,8 +11,6 @@
 #endif
 // info() always displays
 #define info(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
-
-static ISO8601DateFormatter *formatter;
 
 @implementation GFClient {
     dispatch_queue_t backgroundQueue;
@@ -38,20 +27,10 @@ static ISO8601DateFormatter *formatter;
     return self;
 }
 
-+ (void)initialize {
-    formatter = [[ISO8601DateFormatter alloc] init];
-}
-
 - (id)init {
     if (self = [super init]){
-        backgroundQueue = dispatch_queue_create("com.proj.myClass", 0);
+        backgroundQueue = dispatch_queue_create("GFClient", 0);
     }
-    self.dateToStringBlock = ^NSString*(NSDate* date) {
-        if([date isKindOfClass:[NSDate class]]) {
-            return([formatter stringFromDate:date]);
-        }
-        return nil;
-    };
     return self;
 }
 
