@@ -14,7 +14,6 @@
  limitations under the License.
  */
 #import "GFClient.h"
-#import <NSDate+Helper.h>
 #import "NSObject+GFJson.h"
 
 // log macros (adding features to NSLog) that output the code line number
