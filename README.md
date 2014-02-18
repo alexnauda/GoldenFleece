@@ -10,6 +10,26 @@ GoldenFleece is a JSON helper for Objective-C, inspired by [Jackson](http://wiki
 
 In addition to the examples below, this repository includes a minimal Mac app that runs a few test requests against GitHub's public API and serves as an example of how to write an API using GoldenFleece.
 
+## Quick Example
+
+Let's say you are consuming (or want to generate) JSON that looks like this:
+```
+{
+    "itemId":"8675309",
+    "widgetCount":42
+}
+```
+Code an Objective-C object Item.h like this:
+```
+@interface Item : NSObject
+
+@property (strong, nonatomic) NSString *itemId;
+@property (strong, nonatomic) NSNumber *widgetCount;
+
+@end
+```
+GoldenFleece will then serialize and deserialize this to/from JSON automatically. It also has some more sophisticated features, including support for nested custom objects in NSArray and NSDictionary as well as ISO 8601 string formats for NSDate.
+
 ## Installation
 
 We recommend [Cocoapods](http://cocoapods.org/).
