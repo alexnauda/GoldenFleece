@@ -19,12 +19,25 @@ Let's say you are consuming (or want to generate) JSON that looks like this:
     "widgetCount":42
 }
 ```
-Code an Objective-C object Item.h like this:
+Code an Objective-C object like this:
 ```objective-c
+/*
+ * Item.h
+ */
 @interface Item : NSObject
 
 @property (strong, nonatomic) NSString *itemId;
 @property (strong, nonatomic) NSNumber *widgetCount;
+
+@end
+```
+```objective-c
+/*
+ * Item.m
+ */
+#import "Item.h"
+
+@implementation Item
 
 @end
 ```
@@ -34,7 +47,7 @@ Item *item = [[Item alloc] initWithJsonObject:[NSJSONSerialization JSONObjectWit
 ```
 If you're getting your JSON from a REST API call, continue reading for an example of how to make a call.
 
-GoldenFleece also has some more sophisticated features, including support for nested custom objects in NSArray and NSDictionary as well as ISO 8601 string formats for NSDate.
+GoldenFleece also has some more sophisticated features, including support for nested custom objects in properties, custom objects in NSArray and NSDictionary (values only) as well as ISO 8601 string formats to and from NSDate.
 
 ## Installation
 
