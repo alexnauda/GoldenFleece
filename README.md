@@ -20,7 +20,7 @@ Let's say you are consuming (or want to generate) JSON that looks like this:
 }
 ```
 Code an Objective-C object Item.h like this:
-```
+```objective-c
 @interface Item : NSObject
 
 @property (strong, nonatomic) NSString *itemId;
@@ -28,7 +28,13 @@ Code an Objective-C object Item.h like this:
 
 @end
 ```
-GoldenFleece will then serialize and deserialize this to/from JSON automatically. It also has some more sophisticated features, including support for nested custom objects in NSArray and NSDictionary as well as ISO 8601 string formats for NSDate.
+GoldenFleece will then serialize and deserialize this to/from JSON with a one liner. If you have your JSON in an NSString, it might look like this:
+```objective-c
+Item *item = [[Item alloc] initWithJsonObject:[NSJSONSerialization JSONObjectWithData:[yourJsonString dataUsingEncoding:NSUTF8StringEncoding]]];
+```
+If you're getting your JSON from a REST API call, continue reading for an example of how to make a call.
+
+GoldenFleece also has some more sophisticated features, including support for nested custom objects in NSArray and NSDictionary as well as ISO 8601 string formats for NSDate.
 
 ## Installation
 
@@ -42,7 +48,7 @@ If you'd rather install GoldenFleece manually in your project, include all the *
 ## Use
 
 Initialize it once, somewhere in your app (for example, in your app delegate):
-```
+```objective-c
 #import <GFClient.h>
 
 /* ... */
@@ -55,7 +61,7 @@ AFHTTPClient* client = [[AFHTTPClient alloc] initWithBaseURL:baseURL];
 ```
 
 Make a call to an API:
-```
+```objective-c
 [[GFClient sharedInstance] jsonRequestWithObject:nil
                                             path:[NSString stringWithFormat:@"gists/%@", gistId]
                                           method:@"GET"
@@ -71,7 +77,7 @@ Make a call to an API:
 After executing the request, GoldenFleece will alloc your custom object (in this example, GitHubGist) and populate it from the JSON response. If the response contains an array, it will create an NSArray of your custom object.
 
 You can also pass JSON in the request body:
-```
+```objective-c
 [[GFClient sharedInstance] jsonRequestWithObject:comment // <-- this will be converted to JSON and sent as the request entity body
                                             path:[NSString stringWithFormat:@"gists/%@/comments", gistId]
                                           method:@"POST"
@@ -87,7 +93,7 @@ You can also pass JSON in the request body:
 
 ##Nested Custom Objects
 GoldenFleece uses Objective-C introspection to look inside your custom objects and instantiate the proper class for each property. If you have a property that is an NSArray or NSDictionary, you can instruct GoldenFleece to instantiate a custom object of your choice for the elements/values therein:
-```
+```objective-c
 - (NSDictionary*)jsonClasses {
     return @{
              @"forks" : [GitHubGist class]
@@ -97,7 +103,7 @@ GoldenFleece uses Objective-C introspection to look inside your custom objects a
 
 ##Optional Mapping
 By default, GoldenFleece relies on the convention that the properties in your custom objects match the keys in JSON objects verbatim. If this isn't the case, or if the JSON you're working with happens to collide with some Objective-C reserved words, you can specify a custom mapping:
-```
+```objective-c
 - (NSDictionary*)jsonMapping {
     return @{
              // JSON key : property name
