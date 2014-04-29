@@ -232,11 +232,7 @@
         NSString *propertyType = [typeAttribute substringFromIndex:1];
         const char *rawPropertyType = [propertyType UTF8String];
         
-        if (strcmp(rawPropertyType, @encode(float)) == 0) {
-            debug(@"ERROR property %@ has type float, which is not supported", propertyName);
-        } else if (strcmp(rawPropertyType, @encode(int)) == 0) {
-            debug(@"ERROR property %@ has type int, which is not supported", propertyName);
-        } else if ([typeAttribute hasPrefix:@"T@"] && [typeAttribute length] > 1) {
+        if ([typeAttribute hasPrefix:@"T@"] && [typeAttribute length] > 1) {
             NSString * className = [typeAttribute substringWithRange:NSMakeRange(3, [typeAttribute length]-4)];  // remove T@"..."
             debug(@"property %@ has class %@", propertyName, className);
             Class clazz = NSClassFromString(className);
@@ -245,7 +241,13 @@
             } else {
                 debug(@"ERROR could not get class of property %@", propertyName);
             }
-        } else {
+        } else if (strcmp(rawPropertyType, @encode(int)) == 0) {
+            debug(@"ERROR property %@ has type int, which is not supported", propertyName);
+        } else if (strcmp(rawPropertyType, @encode(BOOL)) == 0) {
+            [result setObject:[NSNumber class] forKey:propertyName];
+        } else if (strcmp(rawPropertyType, @encode(float)) == 0) {
+            debug(@"ERROR property %@ has type float, which is not supported", propertyName);
+        }  else {
             debug(@"ERROR property %@ has unrecognized type %s", propertyName, rawPropertyType);
         }
     }
