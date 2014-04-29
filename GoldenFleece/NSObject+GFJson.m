@@ -19,7 +19,7 @@
 
 // log macros (adding features to NSLog) that output the code line number
 // debug() is enabled by a compilation flag
-#ifdef DEBUG
+#ifdef GF_DEBUG
 #   define debug(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
 #else
 #   define debug(...)
