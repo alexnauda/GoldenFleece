@@ -225,9 +225,17 @@
 }
 
 - (NSDictionary*)getPropertiesAndClasses {
+    return [self getPropertiesAndClasses:[self class]];
+}
+
+
+- (NSDictionary*)getPropertiesAndClasses:(Class)clazz {
     NSMutableDictionary *result = [[NSMutableDictionary alloc] init];
+    if (!([clazz superclass] == [NSObject class])) {
+        [result addEntriesFromDictionary:[self getPropertiesAndClasses:[clazz superclass]]];
+    }
     unsigned int count;
-    objc_property_t *props = class_copyPropertyList([self class], &count);
+    objc_property_t *props = class_copyPropertyList(clazz, &count);
     for (int i = 0; i < count; i++) {
         objc_property_t property = props[i];
         const char *name = property_getName(property);
