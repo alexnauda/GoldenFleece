@@ -107,7 +107,11 @@
                     } else {
                         // this block handles both custom classes and NSArrays
                         id propertyValue = [[instantiateClass alloc] initWithJsonObject:[dict objectForKey:jsonName]];
-                        [self setValue:propertyValue forKey:propertyName];
+                        if ([propertyValue isKindOfClass:[NSNull class]]) {
+                            // do nothing; accept default value of property, which should be nil or zero or false
+                        } else {
+                            [self setValue:propertyValue forKey:propertyName];
+                        }
                     }
                 } else {
                     debug(@"did not find a property in class %@ that matches JSON name %@", [self class], jsonName);
@@ -116,6 +120,9 @@
             debug(@"returning object of class %@", [self class]);
             return self;
         }
+    } else if ([jsonObject isKindOfClass:[NSNull class]]) {
+        // do nothing; leave this property nil
+        return nil;
     } else {
         NSLog(@"unsupported JSON object class %@", [jsonObject class]);
         debug(@"returning nil");
