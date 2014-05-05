@@ -106,10 +106,10 @@
                         return result;
                     } else {
                         // this block handles both custom classes and NSArrays
-                        id propertyValue = [[instantiateClass alloc] initWithJsonObject:[dict objectForKey:jsonName]];
-                        if ([propertyValue isKindOfClass:[NSNull class]]) {
+                        if ([[dict objectForKey:jsonName] isKindOfClass:[NSNull class]] || ![dict objectForKey:jsonName]) {
                             // do nothing; accept default value of property, which should be nil or zero or false
                         } else {
+                            id propertyValue = [[instantiateClass alloc] initWithJsonObject:[dict objectForKey:jsonName]];
                             [self setValue:propertyValue forKey:propertyName];
                         }
                     }
