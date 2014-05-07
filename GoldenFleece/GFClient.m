@@ -121,9 +121,6 @@
                      failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure
                   background:(BOOL)background {
     NSMutableURLRequest *request = [self.httpClient requestWithMethod:method path:path parameters:nil];
-    if (!self.cacheResponses) {
-        [request setCachePolicy:NSURLRequestReloadIgnoringCacheData];
-    }
     [request setHTTPBody:data];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     // debug(@"post data: %@", [[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]);
@@ -139,6 +136,13 @@
                                                         failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id json) {
                                                             failure(request, response, error);
                                                         }];
+    if (!self.cacheResponses) {
+        // DISABLE CACHE //
+        [operation setCacheResponseBlock:^NSCachedURLResponse *(NSURLConnection *connection, NSCachedURLResponse *cachedResponse) {
+            return nil;
+        }];
+    }
+    
     if (self.additionalAcceptableContentTypes) {
         [AFJSONRequestOperation addAcceptableContentTypes:self.additionalAcceptableContentTypes];
     }
@@ -165,6 +169,7 @@
                            failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure
                         background:(BOOL)background {
     NSMutableURLRequest *request = [self.httpClient requestWithMethod:method path:path parameters:parameters];
+
     AFJSONRequestOperation *operation =
     [AFJSONRequestOperation JSONRequestOperationWithRequest:request
                                                     success:^(NSURLRequest *request, NSHTTPURLResponse *response, id json) {
@@ -175,6 +180,14 @@
                                                     failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id json) {
                                                         failure(request, response, error);
                                                     }];
+    
+    if (!self.cacheResponses) {
+        // DISABLE CACHE //
+        [operation setCacheResponseBlock:^NSCachedURLResponse *(NSURLConnection *connection, NSCachedURLResponse *cachedResponse) {
+            return nil;
+        }];
+    }
+    
     if (self.additionalAcceptableContentTypes) {
         [AFJSONRequestOperation addAcceptableContentTypes:self.additionalAcceptableContentTypes];
     }
