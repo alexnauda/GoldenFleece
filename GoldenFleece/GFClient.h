@@ -69,4 +69,5 @@ typedef NSString* (^DateToStringBlock)(NSDate*);
 
 @property (strong, atomic) AFHTTPClient *httpClient;
 @property (strong, atomic) NSSet *additionalAcceptableContentTypes;
+@property (nonatomic) BOOL cacheResponses;
 @end

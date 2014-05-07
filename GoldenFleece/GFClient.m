@@ -37,6 +37,7 @@
 }
 
 - (id)initWithHttpClient:(AFHTTPClient*)client {
+    [self setup];
     [client setDefaultHeader:@"Accept" value:@"application/json"];
     self.httpClient = client;
     return self;
@@ -44,9 +45,14 @@
 
 - (id)init {
     if (self = [super init]){
-        backgroundQueue = dispatch_queue_create("GFClient", 0);
+        [self setup];
     }
     return self;
+}
+
+- (void)setup {
+    backgroundQueue = dispatch_queue_create("GFClient", 0);
+    _cacheResponses = YES;
 }
 
 + (id)sharedInstance {
@@ -115,6 +121,9 @@
                      failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure
                   background:(BOOL)background {
     NSMutableURLRequest *request = [self.httpClient requestWithMethod:method path:path parameters:nil];
+    if (!self.cacheResponses) {
+        [request setCachePolicy:NSURLRequestReloadIgnoringCacheData];
+    }
     [request setHTTPBody:data];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     // debug(@"post data: %@", [[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]);
