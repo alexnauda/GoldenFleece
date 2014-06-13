@@ -20,6 +20,7 @@ typedef NSString* (^DateToStringBlock)(NSDate*);
 
 @interface GFClient : NSObject
 + (id)createWithHttpClient:(AFHTTPClient*)client;
+- (id)initWithHttpClient:(AFHTTPClient*)client;
 + (id) sharedInstance;
 
 - (void) jsonRequestWithObject:(NSObject*)object
