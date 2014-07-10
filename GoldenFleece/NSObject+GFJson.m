@@ -260,6 +260,8 @@
             debug(@"ERROR property %@ has type int, which is not supported", propertyName);
         } else if (strcmp(rawPropertyType, @encode(BOOL)) == 0) {
             [result setObject:[NSNumber class] forKey:propertyName];
+        } else if (strcmp(rawPropertyType, @encode(long long)) == 0) {
+            [result setObject:[NSNumber class] forKey:propertyName];
         } else if (strcmp(rawPropertyType, @encode(float)) == 0) {
             debug(@"ERROR property %@ has type float, which is not supported", propertyName);
         }  else {
