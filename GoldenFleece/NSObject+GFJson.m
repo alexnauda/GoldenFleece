@@ -37,11 +37,15 @@
 - (id)initWithJsonObject:(id)jsonObject {
     debug(@"examining jsonObject of class %@", [jsonObject class]);
     if ([self isJsonPrimitive] && [jsonObject isJsonPrimitive]) {
-        /*
-         * JSON primitive (return the primitive)
-         */
-        debug(@"returning object of class %@", [jsonObject class]);
-        return jsonObject;
+        if ([self isKindOfClass:[NSDecimalNumber class]]) {
+            return [NSDecimalNumber decimalNumberWithDecimal:[jsonObject decimalValue]];
+        } else {
+            /*
+             * JSON primitive (return the primitive)
+             */
+            debug(@"returning object of class %@", [jsonObject class]);
+            return jsonObject;
+        }
     } else if ([self isKindOfClass:[NSDate class]]) {
         if ([jsonObject isKindOfClass:[NSString class]]) {
             self = [self initWithDateString:(NSString*)jsonObject];
