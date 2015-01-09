@@ -21,28 +21,15 @@
 		FA2D71CA1892FF18002DD173 /* GFAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FA2D71C91892FF18002DD173 /* GFAppDelegate.m */; };
 		FA2D71CD1892FF18002DD173 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA2D71CB1892FF18002DD173 /* MainMenu.xib */; };
 		FA2D71CF1892FF18002DD173 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA2D71CE1892FF18002DD173 /* Images.xcassets */; };
-		FA2D71D61892FF18002DD173 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA2D71D51892FF18002DD173 /* XCTest.framework */; };
-		FA2D71D71892FF18002DD173 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA2D71B61892FF18002DD173 /* Cocoa.framework */; };
-		FA2D71DF1892FF18002DD173 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FA2D71DD1892FF18002DD173 /* InfoPlist.strings */; };
-		FA2D71E11892FF18002DD173 /* GoldenFleeceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FA2D71E01892FF18002DD173 /* GoldenFleeceTests.m */; };
 		FA2D71ED1893106D002DD173 /* GFGistWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA2D71EB1893106D002DD173 /* GFGistWindowController.m */; };
 		FA2D71EE1893106D002DD173 /* GFGistWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA2D71EC1893106D002DD173 /* GFGistWindowController.xib */; };
 		FA74D8721899A0FE00D71EAD /* GFDateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA74D8711899A0FE00D71EAD /* GFDateFormatter.m */; };
 		FA98CAB918984779002FAA33 /* GitHubGist.m in Sources */ = {isa = PBXBuildFile; fileRef = FA98CAB818984779002FAA33 /* GitHubGist.m */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		FA2D71D81892FF18002DD173 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = FA2D71AB1892FF18002DD173 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = FA2D71B21892FF18002DD173;
-			remoteInfo = GoldenFleece;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
-		4ACEF1A5F31340C5BA7DAEA8 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		27823B561F3794398B964CF4 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		7CC930FBB2ECDAE7A1D24611 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		FA2B0DFA18931BDE00A448E7 /* GFGistCommentWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GFGistCommentWindowController.h; path = GFTestApp/GFGistCommentWindowController.h; sourceTree = SOURCE_ROOT; };
 		FA2B0DFB18931BDE00A448E7 /* GFGistCommentWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GFGistCommentWindowController.m; path = GFTestApp/GFGistCommentWindowController.m; sourceTree = SOURCE_ROOT; };
 		FA2B0DFC18931BDE00A448E7 /* GFGistCommentWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GFGistCommentWindowController.xib; path = GFTestApp/GFGistCommentWindowController.xib; sourceTree = SOURCE_ROOT; };
@@ -68,7 +55,6 @@
 		FA2D71C91892FF18002DD173 /* GFAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = GFAppDelegate.m; path = ../GFTestApp/GFAppDelegate.m; sourceTree = "<group>"; };
 		FA2D71CC1892FF18002DD173 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		FA2D71CE1892FF18002DD173 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ../GFTestApp/Images.xcassets; sourceTree = "<group>"; };
-		FA2D71D41892FF18002DD173 /* GoldenFleeceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GoldenFleeceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA2D71D51892FF18002DD173 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		FA2D71DC1892FF18002DD173 /* GoldenFleeceTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = "GoldenFleeceTests-Info.plist"; path = "GFTestAppTests/GoldenFleeceTests-Info.plist"; sourceTree = "<group>"; };
 		FA2D71DE1892FF18002DD173 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -93,18 +79,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FA2D71D11892FF18002DD173 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FA2D71D71892FF18002DD173 /* Cocoa.framework in Frameworks */,
-				FA2D71D61892FF18002DD173 /* XCTest.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		22B0B833963B38BDFF5AEB29 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				27823B561F3794398B964CF4 /* Pods.debug.xcconfig */,
+				7CC930FBB2ECDAE7A1D24611 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		FA2B0DFF18931DA700A448E7 /* GitHub Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -137,7 +123,7 @@
 				FA2D71DA1892FF18002DD173 /* GFTestAppTests */,
 				FA2D71B51892FF18002DD173 /* Frameworks */,
 				FA2D71B41892FF18002DD173 /* Products */,
-				4ACEF1A5F31340C5BA7DAEA8 /* Pods.xcconfig */,
+				22B0B833963B38BDFF5AEB29 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -145,7 +131,6 @@
 			isa = PBXGroup;
 			children = (
 				FA2D71B31892FF18002DD173 /* GoldenFleece.app */,
-				FA2D71D41892FF18002DD173 /* GoldenFleeceTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -246,24 +231,6 @@
 			productReference = FA2D71B31892FF18002DD173 /* GoldenFleece.app */;
 			productType = "com.apple.product-type.application";
 		};
-		FA2D71D31892FF18002DD173 /* GoldenFleeceTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = FA2D71E71892FF18002DD173 /* Build configuration list for PBXNativeTarget "GoldenFleeceTests" */;
-			buildPhases = (
-				FA2D71D01892FF18002DD173 /* Sources */,
-				FA2D71D11892FF18002DD173 /* Frameworks */,
-				FA2D71D21892FF18002DD173 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				FA2D71D91892FF18002DD173 /* PBXTargetDependency */,
-			);
-			name = GoldenFleeceTests;
-			productName = GoldenFleeceTests;
-			productReference = FA2D71D41892FF18002DD173 /* GoldenFleeceTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -273,11 +240,6 @@
 				CLASSPREFIX = GF;
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Alex Nauda";
-				TargetAttributes = {
-					FA2D71D31892FF18002DD173 = {
-						TestTargetID = FA2D71B21892FF18002DD173;
-					};
-				};
 			};
 			buildConfigurationList = FA2D71AE1892FF18002DD173 /* Build configuration list for PBXProject "GoldenFleece" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -293,7 +255,6 @@
 			projectRoot = "";
 			targets = (
 				FA2D71B21892FF18002DD173 /* GoldenFleece */,
-				FA2D71D31892FF18002DD173 /* GoldenFleeceTests */,
 			);
 		};
 /* End PBXProject section */
@@ -312,14 +273,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FA2D71D21892FF18002DD173 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FA2D71DF1892FF18002DD173 /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -335,7 +288,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BD31BBCAF68245D095F47E1A /* Check Pods Manifest.lock */ = {
@@ -373,23 +326,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FA2D71D01892FF18002DD173 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FA2D71E11892FF18002DD173 /* GoldenFleeceTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		FA2D71D91892FF18002DD173 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = FA2D71B21892FF18002DD173 /* GoldenFleece */;
-			targetProxy = FA2D71D81892FF18002DD173 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		FA2D71BF1892FF18002DD173 /* InfoPlist.strings */ = {
@@ -501,7 +438,7 @@
 		};
 		FA2D71E51892FF18002DD173 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4ACEF1A5F31340C5BA7DAEA8 /* Pods.xcconfig */;
+			baseConfigurationReference = 27823B561F3794398B964CF4 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -515,7 +452,7 @@
 		};
 		FA2D71E61892FF18002DD173 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4ACEF1A5F31340C5BA7DAEA8 /* Pods.xcconfig */;
+			baseConfigurationReference = 7CC930FBB2ECDAE7A1D24611 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -524,46 +461,6 @@
 				INFOPLIST_FILE = "GFTestApp/GoldenFleece-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
-		FA2D71E81892FF18002DD173 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/GoldenFleece.app/Contents/MacOS/GoldenFleece";
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "GoldenFleece/GoldenFleece-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "GoldenFleeceTests/GoldenFleeceTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		FA2D71E91892FF18002DD173 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/GoldenFleece.app/Contents/MacOS/GoldenFleece";
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "GoldenFleece/GoldenFleece-Prefix.pch";
-				INFOPLIST_FILE = "GoldenFleeceTests/GoldenFleeceTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
 		};
@@ -584,15 +481,6 @@
 			buildConfigurations = (
 				FA2D71E51892FF18002DD173 /* Debug */,
 				FA2D71E61892FF18002DD173 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		FA2D71E71892FF18002DD173 /* Build configuration list for PBXNativeTarget "GoldenFleeceTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				FA2D71E81892FF18002DD173 /* Debug */,
-				FA2D71E91892FF18002DD173 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

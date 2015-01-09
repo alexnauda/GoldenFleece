@@ -18,7 +18,7 @@
 
 // log macros (adding features to NSLog) that output the code line number
 // debug() is enabled by a compilation flag
-#ifdef DEBUG
+#ifdef GF_DEBUG
 #   define debug(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
 #else
 #   define debug(...)
@@ -36,6 +36,7 @@
 }
 
 - (id)initWithHttpClient:(AFHTTPClient*)client {
+    [self setup];
     [client setDefaultHeader:@"Accept" value:@"application/json"];
     self.httpClient = client;
     return self;
@@ -43,9 +44,14 @@
 
 - (id)init {
     if (self = [super init]){
-        backgroundQueue = dispatch_queue_create("GFClient", 0);
+        [self setup];
     }
     return self;
+}
+
+- (void)setup {
+    backgroundQueue = dispatch_queue_create("GFClient", 0);
+    _cacheResponses = YES;
 }
 
 + (id)sharedInstance {
@@ -129,6 +135,13 @@
                                                         failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id json) {
                                                             failure(request, response, error);
                                                         }];
+    if (!self.cacheResponses) {
+        // DISABLE CACHE //
+        [operation setCacheResponseBlock:^NSCachedURLResponse *(NSURLConnection *connection, NSCachedURLResponse *cachedResponse) {
+            return nil;
+        }];
+    }
+    
     if (self.additionalAcceptableContentTypes) {
         [AFJSONRequestOperation addAcceptableContentTypes:self.additionalAcceptableContentTypes];
     }
@@ -155,6 +168,7 @@
                            failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure
                         background:(BOOL)background {
     NSMutableURLRequest *request = [self.httpClient requestWithMethod:method path:path parameters:parameters];
+
     AFJSONRequestOperation *operation =
     [AFJSONRequestOperation JSONRequestOperationWithRequest:request
                                                     success:^(NSURLRequest *request, NSHTTPURLResponse *response, id json) {
@@ -165,6 +179,14 @@
                                                     failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id json) {
                                                         failure(request, response, error);
                                                     }];
+    
+    if (!self.cacheResponses) {
+        // DISABLE CACHE //
+        [operation setCacheResponseBlock:^NSCachedURLResponse *(NSURLConnection *connection, NSCachedURLResponse *cachedResponse) {
+            return nil;
+        }];
+    }
+    
     if (self.additionalAcceptableContentTypes) {
         [AFJSONRequestOperation addAcceptableContentTypes:self.additionalAcceptableContentTypes];
     }

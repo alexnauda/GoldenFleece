@@ -19,7 +19,7 @@
 
 // log macros (adding features to NSLog) that output the code line number
 // debug() is enabled by a compilation flag
-#ifdef DEBUG
+#ifdef GF_DEBUG
 #   define debug(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
 #else
 #   define debug(...)
@@ -37,11 +37,15 @@
 - (id)initWithJsonObject:(id)jsonObject {
     debug(@"examining jsonObject of class %@", [jsonObject class]);
     if ([self isJsonPrimitive] && [jsonObject isJsonPrimitive]) {
-        /*
-         * JSON primitive (return the primitive)
-         */
-        debug(@"returning object of class %@", [jsonObject class]);
-        return jsonObject;
+        if ([self isKindOfClass:[NSDecimalNumber class]]) {
+            return [NSDecimalNumber decimalNumberWithDecimal:[jsonObject decimalValue]];
+        } else {
+            /*
+             * JSON primitive (return the primitive)
+             */
+            debug(@"returning object of class %@", [jsonObject class]);
+            return jsonObject;
+        }
     } else if ([self isKindOfClass:[NSDate class]]) {
         if ([jsonObject isKindOfClass:[NSString class]]) {
             self = [self initWithDateString:(NSString*)jsonObject];
@@ -106,8 +110,12 @@
                         return result;
                     } else {
                         // this block handles both custom classes and NSArrays
-                        id propertyValue = [[instantiateClass alloc] initWithJsonObject:[dict objectForKey:jsonName]];
-                        [self setValue:propertyValue forKey:propertyName];
+                        if ([[dict objectForKey:jsonName] isKindOfClass:[NSNull class]] || ![dict objectForKey:jsonName]) {
+                            // do nothing; accept default value of property, which should be nil or zero or false
+                        } else {
+                            id propertyValue = [[instantiateClass alloc] initWithJsonObject:[dict objectForKey:jsonName]];
+                            [self setValue:propertyValue forKey:propertyName];
+                        }
                     }
                 } else {
                     debug(@"did not find a property in class %@ that matches JSON name %@", [self class], jsonName);
@@ -116,6 +124,9 @@
             debug(@"returning object of class %@", [self class]);
             return self;
         }
+    } else if ([jsonObject isKindOfClass:[NSNull class]]) {
+        // do nothing; leave this property nil
+        return nil;
     } else {
         NSLog(@"unsupported JSON object class %@", [jsonObject class]);
         debug(@"returning nil");
@@ -218,9 +229,17 @@
 }
 
 - (NSDictionary*)getPropertiesAndClasses {
+    return [self getPropertiesAndClasses:[self class]];
+}
+
+
+- (NSDictionary*)getPropertiesAndClasses:(Class)clazz {
     NSMutableDictionary *result = [[NSMutableDictionary alloc] init];
+    if (!([clazz superclass] == [NSObject class])) {
+        [result addEntriesFromDictionary:[self getPropertiesAndClasses:[clazz superclass]]];
+    }
     unsigned int count;
-    objc_property_t *props = class_copyPropertyList([self class], &count);
+    objc_property_t *props = class_copyPropertyList(clazz, &count);
     for (int i = 0; i < count; i++) {
         objc_property_t property = props[i];
         const char *name = property_getName(property);
@@ -232,11 +251,7 @@
         NSString *propertyType = [typeAttribute substringFromIndex:1];
         const char *rawPropertyType = [propertyType UTF8String];
         
-        if (strcmp(rawPropertyType, @encode(float)) == 0) {
-            debug(@"ERROR property %@ has type float, which is not supported", propertyName);
-        } else if (strcmp(rawPropertyType, @encode(int)) == 0) {
-            debug(@"ERROR property %@ has type int, which is not supported", propertyName);
-        } else if ([typeAttribute hasPrefix:@"T@"] && [typeAttribute length] > 1) {
+        if ([typeAttribute hasPrefix:@"T@"] && [typeAttribute length] > 1) {
             NSString * className = [typeAttribute substringWithRange:NSMakeRange(3, [typeAttribute length]-4)];  // remove T@"..."
             debug(@"property %@ has class %@", propertyName, className);
             Class clazz = NSClassFromString(className);
@@ -245,7 +260,15 @@
             } else {
                 debug(@"ERROR could not get class of property %@", propertyName);
             }
-        } else {
+        } else if (strcmp(rawPropertyType, @encode(int)) == 0) {
+            debug(@"ERROR property %@ has type int, which is not supported", propertyName);
+        } else if (strcmp(rawPropertyType, @encode(BOOL)) == 0) {
+            [result setObject:[NSNumber class] forKey:propertyName];
+        } else if (strcmp(rawPropertyType, @encode(long long)) == 0) {
+            [result setObject:[NSNumber class] forKey:propertyName];
+        } else if (strcmp(rawPropertyType, @encode(float)) == 0) {
+            debug(@"ERROR property %@ has type float, which is not supported", propertyName);
+        }  else {
             debug(@"ERROR property %@ has unrecognized type %s", propertyName, rawPropertyType);
         }
     }
