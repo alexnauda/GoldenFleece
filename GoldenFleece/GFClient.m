@@ -133,10 +133,6 @@
                                                             success(request, response, object);
                                                         }
                                                         failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id json) {
-                                                            NSDictionary *userInfo = [error userInfo];
-                                                            if (userInfo) {
-                                                                [userInfo setValue:json forKey:@"json"];
-                                                            }
                                                             failure(request, response, error, json);
                                                         }];
     if (!self.cacheResponses) {
