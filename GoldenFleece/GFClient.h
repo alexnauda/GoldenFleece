@@ -27,14 +27,14 @@ typedef NSString* (^DateToStringBlock)(NSDate*);
                         method:(NSString*)method
                  expectedClass:(Class)class
                        success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, id object))success
-                       failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure;
+                       failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id json))failure;
 
 - (void) jsonRequestWithObject:(NSObject*)object
                           path:(NSString*)path
                         method:(NSString*)method
                  expectedClass:(Class)class
                        success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, id object))success
-                       failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure
+                       failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id json))failure
                     background:(BOOL)background;
 
 - (void) jsonRequestWithData:(NSData*)data
@@ -42,14 +42,14 @@ typedef NSString* (^DateToStringBlock)(NSDate*);
                       method:(NSString*)method
                expectedClass:(Class)class
                      success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, id object))success
-                     failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure;
+                     failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id json))failure;
 
 - (void) jsonRequestWithData:(NSData*)data
                         path:(NSString*)path
                       method:(NSString*)method
                expectedClass:(Class)class
                      success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, id object))success
-                     failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure
+                     failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id json))failure
                   background:(BOOL)background;
 
 - (void) jsonRequestWithParameters:(NSDictionary*)parameters
@@ -57,7 +57,7 @@ typedef NSString* (^DateToStringBlock)(NSDate*);
                             method:(NSString*)method
                      expectedClass:(Class)class
                            success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, id object))success
-                           failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure
+                           failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id json))failure
                         background:(BOOL)background;
 
 - (void) jsonRequestWithParameters:(NSDictionary*)parameters
@@ -65,7 +65,7 @@ typedef NSString* (^DateToStringBlock)(NSDate*);
                             method:(NSString*)method
                      expectedClass:(Class)class
                            success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, id object))success
-                           failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure;
+                           failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id json))failure;
 
 @property (strong, atomic) AFHTTPClient *httpClient;
 @property (strong, atomic) NSSet *additionalAcceptableContentTypes;

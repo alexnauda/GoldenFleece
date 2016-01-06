@@ -72,7 +72,7 @@
                         method:(NSString*)method
                  expectedClass:(Class)class
                        success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, id object))success
-                       failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure {
+                       failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id json))failure {
     [self jsonRequestWithObject:object path:path method:method expectedClass:class success:success failure:failure background:NO];
 }
 
@@ -81,7 +81,7 @@
                         method:(NSString*)method
                  expectedClass:(Class)class
                        success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, id object))success
-                       failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure
+                       failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id json))failure
                     background:(BOOL)background {
     // convert the object into a JSON request body
     NSDictionary *dict = [object jsonObject];
@@ -91,7 +91,7 @@
         jsonData = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&error];
         if(jsonData == NULL) {
             info(@"Unable to serialize request body.  Error: %@, info: %@", error, [error userInfo]);
-            failure(nil, nil, error);
+            failure(nil, nil, error, nil);
         } else {
             debug(@"Sending JSON data: %@", [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]);
         }
@@ -108,7 +108,7 @@
                       method:(NSString*)method
                expectedClass:(Class)class
                      success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, id object))success
-                     failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure {
+                     failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id json))failure {
     [self jsonRequestWithData:data path:path method:method expectedClass:class success:success failure:failure background:NO];
 }
 
@@ -117,7 +117,7 @@
                       method:(NSString*)method
                expectedClass:(Class)class
                      success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, id object))success
-                     failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure
+                     failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id json))failure
                   background:(BOOL)background {
     NSMutableURLRequest *request = [self.httpClient requestWithMethod:method path:path parameters:nil];
     [request setHTTPBody:data];
@@ -137,7 +137,7 @@
                                                             if (userInfo) {
                                                                 [userInfo setValue:json forKey:@"json"];
                                                             }
-                                                            failure(request, response, error);
+                                                            failure(request, response, error, json);
                                                         }];
     if (!self.cacheResponses) {
         // DISABLE CACHE //
@@ -160,7 +160,7 @@
                             method:(NSString*)method
                      expectedClass:(Class)class
                            success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, id object))success
-                           failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure {
+                           failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id json))failure {
     [self jsonRequestWithParameters:parameters path:path method:method expectedClass:class success:success failure:failure background:NO];
 }
 
@@ -169,7 +169,7 @@
                             method:(NSString*)method
                      expectedClass:(Class)class
                            success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, id object))success
-                           failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure
+                           failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id json))failure
                         background:(BOOL)background {
     NSMutableURLRequest *request = [self.httpClient requestWithMethod:method path:path parameters:parameters];
 
@@ -181,11 +181,7 @@
                                                         success(request, response, object);
                                                     }
                                                     failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id json) {
-                                                        NSDictionary *userInfo = [error userInfo];
-                                                        if (userInfo) {
-                                                            [userInfo setValue:json forKey:@"json"];
-                                                        }
-                                                        failure(request, response, error);
+                                                        failure(request, response, error, json);
                                                     }];
     
     if (!self.cacheResponses) {

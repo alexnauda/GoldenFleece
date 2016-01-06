@@ -34,7 +34,7 @@
                             success:^(NSURLRequest *request, NSHTTPURLResponse *response, id object) {
                                 GitHubComment *result = (GitHubComment*)object;
                                 [delegate postGistCommentSucceeded:result];
-                            } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                            } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id json) {
                                 [delegate postGistCommentError:error];
                             }
      ];
@@ -48,7 +48,7 @@
                            success:^(NSURLRequest *request, NSHTTPURLResponse *response, id object) {
                                GitHubGist *result = (GitHubGist*)object;
                                [delegate getGistSucceeded:result];
-                           } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                           } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id json) {
                                [delegate getGistError:error];
                            }
      ];
