@@ -3,11 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		12D7C68C64C44189BEE937F5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA9BCC19EF1E4EF3BAE7BCF3 /* libPods.a */; };
+		AE9D0122412B86E269B012D3 /* libPods-GoldenFleece.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EE4223EF7CA1F576003E0349 /* libPods-GoldenFleece.a */; };
 		FA2B0DFD18931BDE00A448E7 /* GFGistCommentWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA2B0DFB18931BDE00A448E7 /* GFGistCommentWindowController.m */; };
 		FA2B0DFE18931BDE00A448E7 /* GFGistCommentWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA2B0DFC18931BDE00A448E7 /* GFGistCommentWindowController.xib */; };
 		FA2B0E0218931DCC00A448E7 /* GitHubComment.m in Sources */ = {isa = PBXBuildFile; fileRef = FA2B0E0118931DCC00A448E7 /* GitHubComment.m */; };
@@ -28,8 +28,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		27823B561F3794398B964CF4 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		7CC930FBB2ECDAE7A1D24611 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		746DFF8FD939E0D78F24818F /* Pods-GoldenFleece.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoldenFleece.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GoldenFleece/Pods-GoldenFleece.debug.xcconfig"; sourceTree = "<group>"; };
+		CA3FF918D8287C8D2967F691 /* Pods-GoldenFleece.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoldenFleece.release.xcconfig"; path = "Pods/Target Support Files/Pods-GoldenFleece/Pods-GoldenFleece.release.xcconfig"; sourceTree = "<group>"; };
+		EE4223EF7CA1F576003E0349 /* libPods-GoldenFleece.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GoldenFleece.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA2B0DFA18931BDE00A448E7 /* GFGistCommentWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GFGistCommentWindowController.h; path = GFTestApp/GFGistCommentWindowController.h; sourceTree = SOURCE_ROOT; };
 		FA2B0DFB18931BDE00A448E7 /* GFGistCommentWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GFGistCommentWindowController.m; path = GFTestApp/GFGistCommentWindowController.m; sourceTree = SOURCE_ROOT; };
 		FA2B0DFC18931BDE00A448E7 /* GFGistCommentWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GFGistCommentWindowController.xib; path = GFTestApp/GFGistCommentWindowController.xib; sourceTree = SOURCE_ROOT; };
@@ -66,7 +67,6 @@
 		FA74D8711899A0FE00D71EAD /* GFDateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFDateFormatter.m; sourceTree = "<group>"; };
 		FA98CAB718984779002FAA33 /* GitHubGist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GitHubGist.h; path = "GFTestApp/GitHub Model/GitHubGist.h"; sourceTree = SOURCE_ROOT; };
 		FA98CAB818984779002FAA33 /* GitHubGist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GitHubGist.m; path = "GFTestApp/GitHub Model/GitHubGist.m"; sourceTree = SOURCE_ROOT; };
-		FA9BCC19EF1E4EF3BAE7BCF3 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,18 +75,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA2D71B71892FF18002DD173 /* Cocoa.framework in Frameworks */,
-				12D7C68C64C44189BEE937F5 /* libPods.a in Frameworks */,
+				AE9D0122412B86E269B012D3 /* libPods-GoldenFleece.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		22B0B833963B38BDFF5AEB29 /* Pods */ = {
+		D0F6479832A57FCC6F75A857 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				27823B561F3794398B964CF4 /* Pods.debug.xcconfig */,
-				7CC930FBB2ECDAE7A1D24611 /* Pods.release.xcconfig */,
+				746DFF8FD939E0D78F24818F /* Pods-GoldenFleece.debug.xcconfig */,
+				CA3FF918D8287C8D2967F691 /* Pods-GoldenFleece.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -123,7 +123,7 @@
 				FA2D71DA1892FF18002DD173 /* GFTestAppTests */,
 				FA2D71B51892FF18002DD173 /* Frameworks */,
 				FA2D71B41892FF18002DD173 /* Products */,
-				22B0B833963B38BDFF5AEB29 /* Pods */,
+				D0F6479832A57FCC6F75A857 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -141,7 +141,7 @@
 				FA2D71B61892FF18002DD173 /* Cocoa.framework */,
 				FA2D71D51892FF18002DD173 /* XCTest.framework */,
 				FA2D71B81892FF18002DD173 /* Other Frameworks */,
-				FA9BCC19EF1E4EF3BAE7BCF3 /* libPods.a */,
+				EE4223EF7CA1F576003E0349 /* libPods-GoldenFleece.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -216,11 +216,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FA2D71E41892FF18002DD173 /* Build configuration list for PBXNativeTarget "GoldenFleece" */;
 			buildPhases = (
-				BD31BBCAF68245D095F47E1A /* Check Pods Manifest.lock */,
+				7945B9B3B9E884819B72F64A /* [CP] Check Pods Manifest.lock */,
 				FA2D71AF1892FF18002DD173 /* Sources */,
 				FA2D71B01892FF18002DD173 /* Frameworks */,
 				FA2D71B11892FF18002DD173 /* Resources */,
-				2666FB8F8C0742C18BEB2540 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -238,11 +237,11 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = GF;
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = "Alex Nauda";
 			};
 			buildConfigurationList = FA2D71AE1892FF18002DD173 /* Build configuration list for PBXProject "GoldenFleece" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -276,34 +275,22 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2666FB8F8C0742C18BEB2540 /* Copy Pods Resources */ = {
+		7945B9B3B9E884819B72F64A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GoldenFleece-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		BD31BBCAF68245D095F47E1A /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -375,18 +362,32 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -412,19 +413,32 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -438,13 +452,20 @@
 		};
 		FA2D71E51892FF18002DD173 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 27823B561F3794398B964CF4 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 746DFF8FD939E0D78F24818F /* Pods-GoldenFleece.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GFTestApp/GoldenFleece-Prefix.pch";
 				INFOPLIST_FILE = "GFTestApp/GoldenFleece-Info.plist";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-framework",
+					"\"CoreGraphics\"",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "alexnauda.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -452,13 +473,20 @@
 		};
 		FA2D71E61892FF18002DD173 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7CC930FBB2ECDAE7A1D24611 /* Pods.release.xcconfig */;
+			baseConfigurationReference = CA3FF918D8287C8D2967F691 /* Pods-GoldenFleece.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GFTestApp/GoldenFleece-Prefix.pch";
 				INFOPLIST_FILE = "GFTestApp/GoldenFleece-Info.plist";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-framework",
+					"\"CoreGraphics\"",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "alexnauda.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
