@@ -51,7 +51,7 @@ GoldenFleece also has some more sophisticated features, including support for ne
 
 ## Installation
 
-We recommend [Cocoapods](http://cocoapods.org/).
+We recommend [CocoaPods](http://cocoapods.org/).
 ```
 pod 'GoldenFleece', '~> 1.1'
 ```
