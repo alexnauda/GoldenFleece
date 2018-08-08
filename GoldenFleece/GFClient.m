@@ -14,7 +14,7 @@
  limitations under the License.
  */
 #import "GFClient.h"
-#import <NSDate+Helper.h>
+#import "NSDate+Helper.h"
 #import "NSObject+GFJson.h"
 
 // log macros (adding features to NSLog) that output the code line number
@@ -31,23 +31,44 @@
     dispatch_queue_t backgroundQueue;
 }
 
-+ (id)createWithHttpClient:(AFHTTPClient*)client {
++ (id)createWithHttpClient:(AFHTTPSessionManager*)client {
     GFClient *gf = [GFClient sharedInstance];
     return [gf initWithHttpClient:client];
 }
 
-- (id)initWithHttpClient:(AFHTTPClient*)client {
-    [self setup];
-    [client setDefaultHeader:@"Accept" value:@"application/json"];
-    self.httpClient = client;
+- (id)initWithHttpClient:(AFHTTPSessionManager*)client {
+    if (self = [super init]){
+        [self setup];
+        [[client requestSerializer] setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+        // [client setDefaultHeader:@"Accept" value:@"application/json"];
+        self.httpClient = client;
+#if GF_ALLOW_INVALID_CERT
+        
+        AFSecurityPolicy *sec=[AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
+        [sec setAllowInvalidCertificates:YES];
+        [sec setValidatesDomainName:NO];
+        self.httpClient.securityPolicy=sec;
+#endif
+        
+        if (!self.cacheResponses) {
+            [self.httpClient setDataTaskWillCacheResponseBlock:^NSCachedURLResponse * _Nonnull(NSURLSession * _Nonnull session, NSURLSessionDataTask * _Nonnull dataTask, NSCachedURLResponse * _Nonnull proposedResponse) {
+                return nil;
+            }];
+            
+            [self.httpClient.session.configuration setRequestCachePolicy:NSURLRequestReloadIgnoringLocalCacheData ];
+            self.httpClient.session.configuration.URLCache = nil;
+        }
+        
+        if (self.additionalAcceptableContentTypes) {
+            self.httpClient.responseSerializer.acceptableContentTypes = [self.httpClient.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:self.additionalAcceptableContentTypes];
+        }
+        
+    }
     return self;
 }
 
 - (id)init {
-    if (self = [super init]){
-        [self setup];
-    }
-    return self;
+    return [self initWithHttpClient:[AFHTTPSessionManager manager]];
 }
 
 - (void)setup {
@@ -65,15 +86,15 @@
 }
 
 /**
- * Send a request with the object serialized into JSON in the response body, 
+ * Send a request with the object serialized into JSON in the response body,
  * and deserialize the response body (also JSON) using the pre-configured entities
  */
 - (void) jsonRequestWithObject:(NSObject*)object
                           path:(NSString*)path
                         method:(NSString*)method
                  expectedClass:(Class)class
-                       success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, id object))success
-                       failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure {
+                       success:(void (^)(NSURLRequest *request, NSURLResponse *response, id object))success
+                       failure:(void (^)(NSURLRequest *request, NSURLResponse *response, NSError *error))failure {
     [self jsonRequestWithObject:object path:path method:method expectedClass:class success:success failure:failure background:NO];
 }
 
@@ -81,8 +102,8 @@
                           path:(NSString*)path
                         method:(NSString*)method
                  expectedClass:(Class)class
-                       success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, id object))success
-                       failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure
+                       success:(void (^)(NSURLRequest *request, NSURLResponse *response, id object))success
+                       failure:(void (^)(NSURLRequest *request, NSURLResponse *response, NSError *error))failure
                     background:(BOOL)background {
     // convert the object into a JSON request body
     NSDictionary *dict = [object jsonObject];
@@ -108,8 +129,8 @@
                         path:(NSString*)path
                       method:(NSString*)method
                expectedClass:(Class)class
-                     success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, id object))success
-                     failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure {
+                     success:(void (^)(NSURLRequest *request, NSURLResponse *response, id object))success
+                     failure:(void (^)(NSURLRequest *request, NSURLResponse *response, NSError *error))failure {
     [self jsonRequestWithData:data path:path method:method expectedClass:class success:success failure:failure background:NO];
 }
 
@@ -117,47 +138,53 @@
                         path:(NSString*)path
                       method:(NSString*)method
                expectedClass:(Class)class
-                     success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, id object))success
-                     failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure
+                     success:(void (^)(NSURLRequest *request, NSURLResponse *response, id object))success
+                     failure:(void (^)(NSURLRequest *request, NSURLResponse *response, NSError *error))failure
                   background:(BOOL)background {
-    NSMutableURLRequest *request = [self.httpClient requestWithMethod:method path:path parameters:nil];
+    
+    NSString* baseURL = [self.httpClient.baseURL absoluteString];
+    
+    NSMutableURLRequest *request = [[self.httpClient requestSerializer] requestWithMethod:method URLString:[NSString stringWithFormat:@"%@/%@",baseURL,path] parameters:nil error:nil];
+    
+    // NSMutableURLRequest *request = [self.httpClient requestWithMethod:method path:path parameters:nil];
     [request setHTTPBody:data];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     // debug(@"post data: %@", [[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]);
     
-    // now run it
-    AFJSONRequestOperation *operation =
-        [AFJSONRequestOperation JSONRequestOperationWithRequest:request
-                                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, id json) {
-                                                            id object = [[class alloc] initWithJsonObject:json];
-                                                            debug(@"Received JSON object %@", json);
-                                                            success(request, response, object);
-                                                        }
-                                                        failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id json) {
-                                                            failure(request, response, error);
-                                                        }];
-    if (!self.cacheResponses) {
-        // DISABLE CACHE //
-        [operation setCacheResponseBlock:^NSCachedURLResponse *(NSURLConnection *connection, NSCachedURLResponse *cachedResponse) {
-            return nil;
-        }];
+    if (background) {
+        [self.httpClient setCompletionQueue:backgroundQueue];
     }
     
-    if (self.additionalAcceptableContentTypes) {
-        [AFJSONRequestOperation addAcceptableContentTypes:self.additionalAcceptableContentTypes];
-    }
-    if (background) {
-        [operation setSuccessCallbackQueue:backgroundQueue];
-    }
-    [operation start];
+    NSURLSessionDataTask* dataTask = [self.httpClient dataTaskWithRequest:request uploadProgress:nil downloadProgress:nil completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable json, NSError * _Nullable error) {
+        if (error) {
+            if (failure) {
+                failure(request,response, error);
+            }
+        } else {
+            if (success) {
+                id object = [[class alloc] initWithJsonObject:json];
+                success(request,response, object);
+            }
+        }
+        
+    }];
+    
+    
+    
+    
+    [dataTask resume];
+    
+    
+    
+    
 }
 
 - (void) jsonRequestWithParameters:(NSDictionary*)parameters
                               path:(NSString*)path
                             method:(NSString*)method
                      expectedClass:(Class)class
-                           success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, id object))success
-                           failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure {
+                           success:(void (^)(NSURLRequest *request, NSURLResponse *response, id object))success
+                           failure:(void (^)(NSURLRequest *request, NSURLResponse *response, NSError *error))failure {
     [self jsonRequestWithParameters:parameters path:path method:method expectedClass:class success:success failure:failure background:NO];
 }
 
@@ -165,36 +192,34 @@
                               path:(NSString*)path
                             method:(NSString*)method
                      expectedClass:(Class)class
-                           success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, id object))success
-                           failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure
+                           success:(void (^)(NSURLRequest *request, NSURLResponse *response, id object))success
+                           failure:(void (^)(NSURLRequest *request, NSURLResponse *response, NSError *error))failure
                         background:(BOOL)background {
-    NSMutableURLRequest *request = [self.httpClient requestWithMethod:method path:path parameters:parameters];
-
-    AFJSONRequestOperation *operation =
-    [AFJSONRequestOperation JSONRequestOperationWithRequest:request
-                                                    success:^(NSURLRequest *request, NSHTTPURLResponse *response, id json) {
-                                                        id object = [[class alloc] initWithJsonObject:json];
-                                                        debug(@"Received JSON object %@", json);
-                                                        success(request, response, object);
-                                                    }
-                                                    failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id json) {
-                                                        failure(request, response, error);
-                                                    }];
+    NSString* baseURL = [self.httpClient.baseURL absoluteString];
+    NSMutableURLRequest *request = [[self.httpClient requestSerializer] requestWithMethod:method URLString:[NSString stringWithFormat:@"%@/%@",baseURL,path] parameters:parameters error:nil];
     
-    if (!self.cacheResponses) {
-        // DISABLE CACHE //
-        [operation setCacheResponseBlock:^NSCachedURLResponse *(NSURLConnection *connection, NSCachedURLResponse *cachedResponse) {
-            return nil;
-        }];
-    }
     
-    if (self.additionalAcceptableContentTypes) {
-        [AFJSONRequestOperation addAcceptableContentTypes:self.additionalAcceptableContentTypes];
-    }
+    
     if (background) {
-        [operation setSuccessCallbackQueue:backgroundQueue];
+        [self.httpClient setCompletionQueue:backgroundQueue];
     }
-    [operation start];
+    
+    NSURLSessionDataTask* dataTask = [self.httpClient dataTaskWithRequest:request uploadProgress:nil downloadProgress:nil completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable json, NSError * _Nullable error) {
+        if (error) {
+            if (failure) {
+                failure(request,response, error);
+            }
+        } else {
+            if (success) {
+                id object = [[class alloc] initWithJsonObject:json];
+                success(request,response, object);
+            }
+        }
+        
+    }];
+    
+    [dataTask resume];
+    
 }
 
 @end

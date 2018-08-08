@@ -8,7 +8,7 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // initialize HTTPClient
     NSURL *baseURL = [NSURL URLWithString:@"https://api.github.com"];
-    AFHTTPClient* client = [[AFHTTPClient alloc] initWithBaseURL:baseURL];
+    AFHTTPSessionManager* client = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL];
     // initialize GoldenFleece
     GFClient __unused *gf = [GFClient createWithHttpClient:client];
 }

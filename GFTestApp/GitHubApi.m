@@ -31,10 +31,10 @@
                                path:[NSString stringWithFormat:@"gists/%@/comments", gistId] // <-- this is relative to the baseUrl used when instantiating AFHTTPClient
                              method:@"POST"
                       expectedClass:[GitHubComment class] // <-- this request returns a JSON object; pass in the class to instantiate and populate from it
-                            success:^(NSURLRequest *request, NSHTTPURLResponse *response, id object) {
+                            success:^(NSURLRequest *request, NSURLResponse *response, id object) {
                                 GitHubComment *result = (GitHubComment*)object;
                                 [delegate postGistCommentSucceeded:result];
-                            } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                            } failure:^(NSURLRequest *request, NSURLResponse *response, NSError *error) {
                                 [delegate postGistCommentError:error];
                             }
      ];
@@ -45,10 +45,10 @@
                               path:[NSString stringWithFormat:@"gists/%@", gistId] // <-- this is relative to the baseUrl used when instantiating AFHTTPClient
                             method:@"GET"
                      expectedClass:[GitHubGist class] // <-- this request returns a JSON object; pass in the class to instantiate and populate from it
-                           success:^(NSURLRequest *request, NSHTTPURLResponse *response, id object) {
+                           success:^(NSURLRequest *request, NSURLResponse *response, id object) {
                                GitHubGist *result = (GitHubGist*)object;
                                [delegate getGistSucceeded:result];
-                           } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                           } failure:^(NSURLRequest *request, NSURLResponse *response, NSError *error) {
                                [delegate getGistError:error];
                            }
      ];
