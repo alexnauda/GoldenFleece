@@ -37,18 +37,19 @@
 - (id)initWithJsonObject:(id)jsonObject {
     debug(@"examining jsonObject of class %@", [jsonObject class]);
     if ([self isJsonPrimitive] && [jsonObject isJsonPrimitive]) {
-        if ([self isKindOfClass:[NSDecimalNumber class]]) {
-            return [NSDecimalNumber decimalNumberWithDecimal:[jsonObject decimalValue]];
-        } else {
-            /*
-             * JSON primitive (return the primitive)
-             */
-            debug(@"returning object of class %@", [jsonObject class]);
-            return jsonObject;
-        }
+        /*
+         * JSON primitive (return the primitive)
+         */
+        debug(@"returning object of class %@", [jsonObject class]);
+        return jsonObject;
     } else if ([self isKindOfClass:[NSDate class]]) {
         if ([jsonObject isKindOfClass:[NSString class]]) {
             self = [self initWithDateString:(NSString*)jsonObject];
+        }else{
+            double val = [jsonObject doubleValue]/1000.0;
+            NSDate* dt = [[NSDate alloc] initWithTimeIntervalSince1970:val];
+            
+            self = [self initWithDateString:[[GFDateFormatter sharedInstance] stringFromDate:dt]];
         }
         debug(@"returning object of class %@", [self class]);
         return self;
@@ -94,20 +95,23 @@
                 
                 // look at the class of the property itself
                 Class propertyClass = [props objectForKey:propertyName];
-
+                
                 // check jsonClasses for any special configuration on this field
                 Class jsonClass = [self getJsonClass:propertyName];
                 Class instantiateClass = jsonClass ? jsonClass : propertyClass;
                 if (propertyClass) {
                     if ([propertyClass isSubclassOfClass:[NSDictionary class]] && jsonClass && ![jsonClass isSubclassOfClass:[NSDictionary class]]) {
                         // special case: normally we try to instantiate an NSDictionary as a custom class
-                        NSMutableDictionary *result = [[NSMutableDictionary alloc] initWithCapacity:[dict count]];
-                        for (NSString *key in [dict allKeys]) {
-                            id customValue = [[instantiateClass alloc] initWithJsonObject:[dict objectForKey:jsonName]];
+                        NSDictionary* innerDict =  [dict objectForKey:jsonName];
+                        NSMutableDictionary *result = [[NSMutableDictionary alloc] initWithCapacity:[innerDict count]];
+                        for (NSString *key in [innerDict allKeys]) {
+                            id customValue = [[instantiateClass alloc] initWithJsonObject:[innerDict objectForKey:key]];
                             [result setObject:customValue forKey:key];
                         }
                         debug(@"returning object of class %@", result);
-                        return result;
+                        [self setValue:result forKey:propertyName];
+                        // return result;
+                        
                     } else {
                         // this block handles both custom classes and NSArrays
                         if ([[dict objectForKey:jsonName] isKindOfClass:[NSNull class]] || ![dict objectForKey:jsonName]) {
@@ -133,7 +137,7 @@
         return nil;
     }
 }
-
+#pragma clang diagnostic ignored "-Wobjc-designated-initializers"
 - (id)initWithDateString:(NSString*)dateString {
     return [[GFDateFormatter sharedInstance] dateFromString:dateString];
 }
@@ -260,15 +264,22 @@
             } else {
                 debug(@"ERROR could not get class of property %@", propertyName);
             }
-        } else if (strcmp(rawPropertyType, @encode(int)) == 0) {
-            debug(@"ERROR property %@ has type int, which is not supported", propertyName);
+        } else if (strcasecmp(rawPropertyType, @encode(int)) == 0) {
+            [result setObject:[NSNumber class] forKey:propertyName];
+            
+        }else if (strcasecmp(rawPropertyType, @encode(long)) == 0) {
+            [result setObject:[NSNumber class] forKey:propertyName];
+            
         } else if (strcmp(rawPropertyType, @encode(BOOL)) == 0) {
             [result setObject:[NSNumber class] forKey:propertyName];
-        } else if (strcmp(rawPropertyType, @encode(long long)) == 0) {
+        } else if (strcasecmp(rawPropertyType, @encode(long long)) == 0) {
             [result setObject:[NSNumber class] forKey:propertyName];
         } else if (strcmp(rawPropertyType, @encode(float)) == 0) {
-            debug(@"ERROR property %@ has type float, which is not supported", propertyName);
-        }  else {
+            [result setObject:[NSNumber class] forKey:propertyName];
+            
+        } else if (strcmp(rawPropertyType, @encode(double)) == 0) {
+            [result setObject:[NSNumber class] forKey:propertyName];
+        } else {
             debug(@"ERROR property %@ has unrecognized type %s", propertyName, rawPropertyType);
         }
     }
@@ -289,16 +300,16 @@
  
  Return an NSDictionary of NSString : Class. While deserializing JSON, if GoldenFleece
  encounters an NSArray or NSDictionary property with a name matching the key, it will
- deserialize the contents by instantiating and populting the specified Class as a nested 
+ deserialize the contents by instantiating and populting the specified Class as a nested
  custom object for each element in the JSON array. Please note that the keys in this
  dictionary correspond to the property names (not the JSON keys).
  
  Example:
  - (NSDictionary*)jsonClasses {
-    return @{
-             @"comments" : [MyComment class],
-             @"addresses" : [MyAddress class]
-             };
+ return @{
+ @"comments" : [MyComment class],
+ @"addresses" : [MyAddress class]
+ };
  }
  */
 - (NSDictionary*)jsonClasses {
@@ -315,9 +326,9 @@
  
  Example:
  - (NSDictionary*)jsonMapping {
-    return @{
-             @"signed" : @"isSigned"
-             }
+ return @{
+ @"signed" : @"isSigned"
+ }
  }
  */
 - (NSDictionary*)jsonMapping {

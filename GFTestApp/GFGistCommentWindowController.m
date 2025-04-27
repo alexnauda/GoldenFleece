@@ -25,7 +25,8 @@
 
 - (IBAction)postButtonClicked:(id)sender {
     NSLog(@"POST username=%@ comment=[%@]", self.usernameTextField.stringValue, self.commentTextField.stringValue);
-    [[[GFClient sharedInstance] httpClient] setAuthorizationHeaderWithUsername:self.usernameTextField.stringValue password:self.passwordTextField.stringValue];
+    [[[GFClient sharedInstance] httpClient].requestSerializer setAuthorizationHeaderFieldWithUsername:self.usernameTextField.stringValue password:self.passwordTextField.stringValue];
+    
     GitHubComment *comment = [[GitHubComment alloc] init];
     comment.body = self.commentTextField.stringValue;
     [[GitHubApi sharedInstance] postGistComment:comment forGist:self.gistIdTextField.stringValue delegate:self];
