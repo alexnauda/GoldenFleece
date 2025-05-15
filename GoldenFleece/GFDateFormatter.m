@@ -38,7 +38,10 @@
 - (id)init {
     self = [super init];
     if (self) {
-        _formatter = [[ISO8601DateFormatter alloc] init];
+        _formatter = [[NSDateFormatter alloc] init];
+        _formatter.locale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
+        _formatter.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"UTC"];
+        _formatter.dateFormat = @"yyyy-MM-dd"; // Standard ISO 8601
     }
     return self;
 }
