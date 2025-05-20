@@ -40,7 +40,7 @@
     if (self) {
         _formatter = [[NSDateFormatter alloc] init];
         _formatter.locale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
-        _formatter.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"UTC"];
+        _formatter.timeZone = [NSTimeZone localTimeZone];
         _formatter.dateFormat = @"yyyy-MM-dd"; // Standard ISO 8601
     }
     return self;
