@@ -169,6 +169,10 @@
  Numbers are not NaN or infinity."
  */
 - (id)jsonObject {
+    return [self gfJsonObject];
+}
+
+- (id)gfJsonObject {
     if ([self isKindOfClass:[NSArray class]]) {
         return [self toJsonArray];
     } else if ([self isKindOfClass:[NSDictionary class]]) {
@@ -186,7 +190,7 @@
     NSArray *array = (NSArray*)self;
     NSMutableArray *result = [[NSMutableArray alloc] initWithCapacity:[array count]];
     for (NSObject *elem in array) {
-        [result addObject:[elem jsonObject]];
+        [result addObject:[elem gfJsonObject]];
     }
     return result;
 }
@@ -211,7 +215,7 @@
             }
             id propValue = [self valueForKeyPath:propName];
             if (propValue) {
-                [result setObject:[propValue jsonObject] forKey:jsonName];
+                [result setObject:[propValue gfJsonObject] forKey:jsonName];
             } else {
                 [result setObject:[NSNull null] forKey:jsonName];
             }

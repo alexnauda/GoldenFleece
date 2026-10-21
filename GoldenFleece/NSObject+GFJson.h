@@ -17,5 +17,7 @@
 
 @interface NSObject (GFJson)
 - (id)initWithJsonObject:(id)jsonObject;
-- (id)jsonObject;
+// Use the prefixed selector for custom serializers and all serialization calls.
+- (id)gfJsonObject;
+- (id)jsonObject __attribute__((deprecated("Use gfJsonObject to avoid method name collisions.")));
 @end

@@ -84,7 +84,7 @@
                        failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id json))failure
                     background:(BOOL)background {
     // convert the object into a JSON request body
-    NSDictionary *dict = [object jsonObject];
+    NSDictionary *dict = [object gfJsonObject];
     NSError *error = NULL;
     NSData* jsonData = NULL;
     if (object) {
